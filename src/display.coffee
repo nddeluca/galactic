@@ -9,8 +9,8 @@ class Display extends Canvas
     @imageData = image.data
     @imageWidth = image.width
     @imageHeight = image.height
-    @min = utils.min(imageData)
-    @max = utils.max(imageData)
+    @min = utils.min(@imageData)
+    @max = utils.max(@imageData)
 
     #Find scaled width, scale ratio,
     #and corresponding height (keeps same aspect ratio)
