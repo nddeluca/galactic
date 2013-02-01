@@ -11,7 +11,7 @@ Galactic.ColorProcessor = require('./color_processor')
 
 #model related classes
 Galactic.Model = require('./model')
-Galactic.Residual = require('.residual')
+Galactic.Residual = require('./residual')
 
 #dipslay related functions and utilities
 Galactic.utils = require ('./utils')
