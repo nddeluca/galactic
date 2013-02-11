@@ -22,6 +22,8 @@ Galactic.colors = require('./colors')
 Galactic.Model = require('./model')
 Galactic.Modeler = require('./modeler')
 
+Galactic.Sersic = require('./sersic')
+
 #Residual related classes
 Galactic.Residual = require('./residual')
 

@@ -38,3 +38,5 @@ class Sersic extends Model
         exponent = norm*Math.pow(r/@params.effRadius,1/@params.n) - 1
         @data[y*width+x] = @params.intensity*Math.exp(-exponent)
     undefined
+
+module?.exports = Sersic
