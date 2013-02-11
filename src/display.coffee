@@ -10,8 +10,8 @@ class Display extends Canvas
     @image = new Image(image.width,image.height)
     @image.data = image.data
 
-    @min = utils.min(@image.data)
-    @max = utils.max(@image.data)
+    @min = utils.min(image.data)
+    @max = utils.max(image.data)
 
 
     #Find scaled width, scale ratio,
@@ -56,7 +56,7 @@ class Display extends Canvas
 
   #Holds RGBA Array
   buildColorBuffers: ->
-    @colorBuffer = new ArrayBuffer(@image.width*@imageheight*4)
+    @colorBuffer = new ArrayBuffer(@image.width*@image.height*4)
     @colorView8 = new Uint8ClampedArray(@colorBuffer)
     @colorView32 = new Uint32Array(@colorBuffer)
     undefined
