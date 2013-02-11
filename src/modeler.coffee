@@ -66,17 +66,17 @@ class Modeler
 
   rebuildModel: (name) ->
     model = @findModel
-    model.generate
+    model.build()
     undefined
   
   disableModel: (name) ->
     model = @findModel(name)
-    model.disable
+    model.disable()
     undefined
 
   enableModel: (name) ->
     model = @findModel(name)
-    model.enable
+    model.enable()
     undefined
 
   #Creates an array of all enabled models
