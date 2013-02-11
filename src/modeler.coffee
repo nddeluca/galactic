@@ -91,6 +91,10 @@ class Modeler
 
     models = @getEnabledModels()
     
+    if models.length == 0
+      for index in [0..@width*@height]
+        @image.data[index] = 0
+
     #Get first model in array
     #so we can assign it to the data
     model = models.shift()
