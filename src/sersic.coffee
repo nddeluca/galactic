@@ -3,8 +3,8 @@ Model = require('./model')
 class Sersic extends Model
   constructor: (@name,@width,@height) ->
     super(@name,@width,@height)
-    @initDefaultParams
-    @initParamArray
+    @initDefaultParams()
+    @initParamArray()
 
   initParamArray: ->
     @paramArray = ['centerX',
