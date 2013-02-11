@@ -18,8 +18,8 @@ class Display extends Canvas
     #and corresponding height (keeps same aspect ratio)
     #In addition use ~~ to truncat values for integer pixels
     scaledWidth = ~~desiredWidth
-    @scaleRatio = @imageWidth/scaledWidth
-    scaledHeight = ~~(@imageHeight/@scaleRatio)
+    @scaleRatio = @image.width/scaledWidth
+    scaledHeight = ~~(@image.height/@scaleRatio)
     
     #Build buffers for stretch and coloring
     @buildStretchBuffers()
