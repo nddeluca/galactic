@@ -9,6 +9,7 @@ class Display extends Canvas
     #Set up image data and information
     @image = new Image(image.width,image.height)
     @image.data = image.data
+
     @min = utils.min(@image.data)
     @max = utils.max(@image.data)
 
@@ -49,13 +50,13 @@ class Display extends Canvas
   #This holds fits data with an applied scale (linear, log, etc)
   #All values should be 0 to 255 only
   buildStretchBuffers: ->
-    @stretchBuffer = new ArrayBuffer(@imageWidth*@imageHeight)
+    @stretchBuffer = new ArrayBuffer(@image.width*@image.height)
     @stretchView8 = new Uint8ClampedArray(@stretchBuffer)
     undefined
 
   #Holds RGBA Array
   buildColorBuffers: ->
-    @colorBuffer = new ArrayBuffer(@imageWidth*@imageHeight*4)
+    @colorBuffer = new ArrayBuffer(@image.width*@imageheight*4)
     @colorView8 = new Uint8ClampedArray(@colorBuffer)
     @colorView32 = new Uint32Array(@colorBuffer)
     undefined
@@ -64,12 +65,12 @@ class Display extends Canvas
     @stretch(@image.data,@stretchView8,@min,@max)
     @color(@stretchView8,@colorView32)
 
-    invertCoeff = (@imageHeight - 1)*@imageWidth
+    invertCoeff = (@image.height - 1)*@image.width
 
     for x in [0..(@canvasWidth-1)]
       coeff = ~~(x*@scaleRatio) + invertCoeff
       for y in [0..(@canvasHeight-1)]
-        @canvasView32[(@canvasWidth*y)+x] = @colorView32[coeff - (~~(y*@scaleRatio))*@imageWidth]
+        @canvasView32[(@canvasWidth*y)+x] = @colorView32[coeff - (~~(y*@scaleRatio))*@image.width]
     undefined
     
 module?.exports = Display
