@@ -40,7 +40,7 @@ class Display extends Canvas
         @stretch = stretches.linear
         true
       when "log"
-        @streth = stretches.log
+        @stretch = stretches.log
         true
       when "power"
         @stretch = stretches.power
