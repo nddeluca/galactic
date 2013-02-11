@@ -23,4 +23,22 @@ stretches =
       stretchData[i] = ~~(255*((value*value)/max_power))
     undefined
 
+  sqrt: (imageData,stretchData,min,max) ->
+    range = max - min
+    max_sqrt = Math.sqrt(range)
+
+    for i in [0..(stretchData.length - 1)]
+      stretchData[i] = ~~(255*((Math.sqrt(imageData[i] - min))/max_sqrt))
+    undefined
+
+  arcsinh: (imageData,stretchData,min,max) ->
+    range = max - min
+    max_asinh = Math.log(range + Math.sqrt(range*range + 1))
+
+    for i in [0..(stretchData.length - 1)]
+      point = imageData[i] - min
+      value = Math.log(point + Math.sqrt(point*point + 1))
+      stretchData[i] = ~~(255*(value/max_asinh))
+    undefined
+
 module?.exports = stretches

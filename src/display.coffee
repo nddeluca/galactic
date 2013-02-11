@@ -45,6 +45,12 @@ class Display extends Canvas
       when "power"
         @stretch = stretches.power
         true
+      when "sqrt"
+        @stretch = stretches.sqrt
+        true
+      when "arcsinh"
+        @stretch = stretches.arcsinh
+        true
       else false
 
   #This holds fits data with an applied scale (linear, log, etc)
