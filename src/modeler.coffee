@@ -59,6 +59,11 @@ class Modeler
     model.updateParams(params)
     undefined
 
+  updateParam: (name,param,value) ->
+    model = @findModel(name)
+    model.params[param] = value
+    model.stale = true
+
   rebuildModel: (name) ->
     model = @findModel
     model.generate
