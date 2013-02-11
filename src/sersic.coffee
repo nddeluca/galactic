@@ -36,7 +36,7 @@ class Sersic extends Model
         r_y = ((y-@params.centerY)*cos-(x-@params.centerX)*sin)/@params.axisRatio
         r = Math.sqrt(r_x*r_x + r_y*r_y)
         exponent = norm*Math.pow(r/@params.effRadius,1/@params.n) - 1
-        @data[y*width+x] = @params.intensity*Math.exp(-exponent)
+        @data[y*@width+x] = @params.intensity*Math.exp(-exponent)
     undefined
 
 module?.exports = Sersic
