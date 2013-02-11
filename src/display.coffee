@@ -2,15 +2,16 @@ Canvas = require('./canvas')
 stretches = require('./stretches')
 colors = require('./colors')
 utils = require('./utils')
+Image = require('./image')
 
 class Display extends Canvas
   constructor: (container,desiredWidth,image) ->
     #Set up image data and information
-    @imageData = image.data
-    @imageWidth = image.width
-    @imageHeight = image.height
-    @min = utils.min(@imageData)
-    @max = utils.max(@imageData)
+    @image = new Image(image.width,image.height)
+    @image.data = image.data
+    @min = utils.min(@image.data)
+    @max = utils.max(@image.data)
+
 
     #Find scaled width, scale ratio,
     #and corresponding height (keeps same aspect ratio)
@@ -60,7 +61,7 @@ class Display extends Canvas
     undefined
   
   processImage: ->
-    @stretch(@imageData,@stretchView8,@min,@max)
+    @stretch(@image.data,@stretchView8,@min,@max)
     @color(@stretchView8,@colorView32)
 
     invertCoeff = (@imageHeight - 1)*@imageWidth

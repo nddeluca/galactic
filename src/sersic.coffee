@@ -2,15 +2,13 @@ Model = require('./model')
 
 class Sersic extends Model
   constructor: (@name,@width,@height) ->
-    @params = {}
-    @initDefaultParams
-
     super(@name,@width,@height)
+    @initDefaultParams
+    @initParamArray
 
-
-  getParamList: ->
-    ['center_x',
-     'center_y',
+  initParamArray: ->
+    @paramArray = ['centerX',
+     'centerY',
      'angle',
      'axisRatio',
      'effRadius',
@@ -19,16 +17,16 @@ class Sersic extends Model
 
   initDefaultParams: ->
     @params =
-      center:
-        x: 31.5
-        y: 42
+      centerX: 31.5
+      centerY: 42
       angle: 0
       axisRatio: 1
       effRadius: 6
       intensity: 2.3
       n: 1
     
-  generate: ->
+  build: ->
+    super
     norm = @params.n*Math.exp(0.6950-0.1789/@params.n)
     sin = Math.sin(@params.angle)
     cos = Math.cos(@params.angle)
