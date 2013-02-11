@@ -18,7 +18,7 @@ stretches =
     range = max - min
     max_power = range*range
 
-    for i in [0..(stretchData.length -1)]
+    for i in [0..(stretchData.length - 1)]
       value = imageData[i] - min
       stretchData[i] = ~~(255*((value*value)/max_power))
     undefined
