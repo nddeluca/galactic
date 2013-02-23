@@ -13,6 +13,14 @@ utils = require('./utils')
 Image = require('./image')
 
 class Display extends Canvas
+  #Initializes all the required information
+  #and sets the width and height of the display.
+  #
+  #The container is the div element the display will be
+  #appended to.  The desiredWidth is the with of this display,
+  #and the height will automatically be set to preserve the aspect ratio.
+  #The image object must have width, height, and a data attribute.
+  #See image.coffee for an example of an image class.
   constructor: (container,desiredWidth,image) ->
     @image = new Image(image.width,image.height)
     @image.data = image.data
@@ -31,6 +39,11 @@ class Display extends Canvas
 
     super container,scaledWidth,scaledHeight
 
+  #Sets the stretch used to display the image.
+  #The actually stretch functions are stored
+  #in stretches.coffee.  It will return true
+  #if the stretch is availiable or false if
+  #no stretch fucntion is found.
   setStretch: (stretch) ->
     switch stretch
       when "linear"
@@ -50,20 +63,31 @@ class Display extends Canvas
         true
       else false
 
-  #This holds fits data with an applied scale (linear, log, etc)
-  #All values should be 0 to 255 only
+  
+  #Initializes the ArrayBuffer and Uint8ClampedArray used
+  #to store the image data after it has been processed by
+  #one of the stretch functions.  The values stored in this array
+  #must be 0-255 integers, hence the 8-bit clamped array.
   buildStretchBuffers: ->
     @stretchBuffer = new ArrayBuffer(@image.width*@image.height)
     @stretchView8 = new Uint8ClampedArray(@stretchBuffer)
     undefined
 
-  #Holds RGBA Array
+  #Initilizes the ArrayBuffer for storing RBGA pixel data.
+  #An 8-bit and 32-bit UintArray's are provided for the buffer.
+  #The Uint8ClampedArray is provided for simpler usage; however,
+  #the Uint32Array provides better performance.
   buildColorBuffers: ->
     @colorBuffer = new ArrayBuffer(@image.width*@image.height*4)
     @colorView8 = new Uint8ClampedArray(@colorBuffer)
     @colorView32 = new Uint32Array(@colorBuffer)
     undefined
   
+  #Handles the processing of the image data into the required
+  #form for display on a canvas.  It calls the stretch function,
+  #colormap function, and scales the data using a nearest-neighbor
+  #algorithm to fit the size of the canvas.  Also, the y-axis is flipped
+  #to accomadate the origin location on the HTML5 canvas.
   processImage: ->
     @stretch(@image.data,@stretchView8,@min,@max)
     @colormap(@stretchView8,@colorView32)
