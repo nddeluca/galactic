@@ -4,18 +4,18 @@ A library for displaying fits images of galaxies and interactivley creating mode
 
 Install
 ---
-Assuming your using a spinejs or hem application:
+Assuming you're the project inside a spinejs or hem application:
 
 Add to package.json
 ```coffeescript
 "dependencies": {
-  "fits_canvas": "git://github.com/nddeluca/fits_canvas.git"
+  "galactic": "git://github.com/nddeluca/galactic.git"
 }
 ```
 Add to slug.json
 ```coffeescript
 "dependencies": [
-  "fits_canvas"
+  "galactic"
 ]
 ```
 Run
