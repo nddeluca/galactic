@@ -1,3 +1,4 @@
+#Contains the different functions used to stretch the image on the display.
 stretches =
   linear: (imageData,stretchData,min,max) ->
     range = max - min
