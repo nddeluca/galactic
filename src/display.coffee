@@ -1,3 +1,11 @@
+#The Display class handles the displaying of grayscale image data, where each
+#pixel of the original image is stored as Float32 intensity value.
+#Using a chosen stretch (linear by default), the maps the original 
+#Float32 intensity values onto a 0-255 integer instensity space.
+#Then a with a chosen colormap (grayscale by default), the 0-255
+#integer intensity values are mapped into RBGA pixel values for display
+#on an HTML5 canvas.
+
 Canvas = require('./canvas')
 stretches = require('./stretches')
 colors = require('./colors')
@@ -6,32 +14,21 @@ Image = require('./image')
 
 class Display extends Canvas
   constructor: (container,desiredWidth,image) ->
-    #Set up image data and information
     @image = new Image(image.width,image.height)
     @image.data = image.data
-
     @min = utils.min(image.data)
     @max = utils.max(image.data)
 
-
-    #Find scaled width, scale ratio,
-    #and corresponding height (keeps same aspect ratio)
-    #In addition use ~~ to truncat values for integer pixels
     scaledWidth = ~~desiredWidth
     @scaleRatio = @image.width/scaledWidth
     scaledHeight = ~~(@image.height/@scaleRatio)
     
-    #Build buffers for stretch and coloring
     @buildStretchBuffers()
     @buildColorBuffers()
     
-    #Set default scale and color
     @stretch = stretches.linear
-    @color = colors.grayscale
+    @colormap = colors.grayscale
 
-
-    #Call super to set up canvas and display buffers
-    #This also sets @width and @height
     super container,scaledWidth,scaledHeight
 
   setStretch: (stretch) ->
@@ -69,7 +66,7 @@ class Display extends Canvas
   
   processImage: ->
     @stretch(@image.data,@stretchView8,@min,@max)
-    @color(@stretchView8,@colorView32)
+    @colormap(@stretchView8,@colorView32)
 
     invertCoeff = (@image.height - 1)*@image.width
 

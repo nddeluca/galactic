@@ -25,6 +25,7 @@ class Modeler
     #initialize array of models that will be used
     #to create the model image
     @models = []
+    @undo = []
 
 
   #Create a new model and add it to the model array.
@@ -60,6 +61,7 @@ class Modeler
     undefined
 
   updateParam: (name,param,value) ->
+    @saveUndo()
     model = @findModel(name)
     model.params[param] = value
     model.stale = true
@@ -86,7 +88,17 @@ class Modeler
       if model.enabled
         models.push(model)
     models
- 
+  
+  @saveUndo: ->
+    @undo.push(@models)
+    if @undo.length > 10
+      @undo.pop
+
+  @reloadUndo: ->
+    if @undo.length > 0
+      @models = @undo[0]
+      @undo.splice(0,1)
+    
   build: ->
 
     models = @getEnabledModels()
