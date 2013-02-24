@@ -2,8 +2,8 @@
 stretches =
   linear: (imageData,stretchData,min,max) ->
     invRange = 1/(max-min)
-    i = stretchData.length
 
+    i = stretchData.length
     while i--
       stretchData[i] = ~~(255*((imageData[i] - min)*invRange))
     undefined
@@ -12,8 +12,9 @@ stretches =
     range = max - min
     invLN10 = 1/Math.LN10
     invMaxLog = 1/(Math.log(range)*invLN10)
-
-    for i in [0..(stretchData.length - 1)]
+    
+    i = stretchData.length
+    while i--
       stretchData[i] = ~~(255*((Math.log(imageData[i] - min + 1)*invLN10)*invMaxLog))
     undefined
 
@@ -21,7 +22,9 @@ stretches =
     range = max - min
     invMaxPow = 1/(range*range)
 
-    for i in [0..(stretchData.length - 1)]
+    
+    i = stretchData.length
+    while i--
       value = imageData[i] - min
       stretchData[i] = ~~(255*((value*value)*invMaxPow))
     undefined
@@ -30,7 +33,8 @@ stretches =
     range = max - min
     invMaxSqrt = 1/Math.sqrt(range)
 
-    for i in [0..(stretchData.length - 1)]
+    i = stretchData.length
+    while i--
       stretchData[i] = ~~(255*((Math.sqrt(imageData[i] - min))*invMaxSqrt))
     undefined
 
@@ -38,7 +42,8 @@ stretches =
     range = max - min
     max_asinh = Math.log(range + Math.sqrt(range*range + 1))
     invMaxAsinh = 1/max_asinh
-    for i in [0..(stretchData.length - 1)]
+    i = stretchData.length
+    while i--
       point = imageData[i] - min
       value = Math.log(point + Math.sqrt(point*point + 1))
       stretchData[i] = ~~(255*(value*invMaxAsinh))

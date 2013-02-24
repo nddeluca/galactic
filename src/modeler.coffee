@@ -99,29 +99,29 @@ class Modeler
       @undo.splice(0,1)
     
   build: ->
+    width = @width
+    height = @height
+
 
     models = @getEnabledModels()
     
     if models.length == 0
+      console.log @image.data.length
+      console.log @width*@height
       for index in [0..@width*@height]
         @image.data[index] = 0
     else
-      #Get first model in array
-      #so we can assign it to the data
       model = models.shift()
-      #Only generate the model if its changed
       model.build() if model.stale
       for index in [0..@width*@height]
         @image.data[index] = model.data[index]
 
-      #Add other models to the data
       if models.length > 0
         for model in models
           model.build() if model.stale
           for index in [0..@width*@height]
             @image.data[index] += model.data[index]
 
-    #Build residual image
     @residual.build(@fitsData,@image.data)
 
     undefined
