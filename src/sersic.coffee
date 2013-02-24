@@ -43,9 +43,10 @@ class Sersic extends Model
 
     width = @width
     height = @height
-
-    for x in [0..(width-1)]
-      for y in [0..(height-1)]
+    x = width
+    while x--
+      y = height
+      while y--
         r_x = (x-cx)*cos+(y-cy)*sin
         r_y = ((y-cy)*cos-(x-cx)*sin)*invAxisRatio
         r = Math.sqrt(r_x*r_x + r_y*r_y)
