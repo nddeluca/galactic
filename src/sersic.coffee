@@ -28,6 +28,7 @@ class Sersic extends Model
   build: ->
     super
 
+    data = @data
     n = @params.n
     invN = 1/n
     cx = @params.centerX
@@ -51,7 +52,7 @@ class Sersic extends Model
         r_y = ((y-cy)*cos-(x-cx)*sin)*invAxisRatio
         r = Math.sqrt(r_x*r_x + r_y*r_y)
         exponent = norm*Math.pow(r*invEffRadius,invN) - 1
-        @data[y*width+x] = intensity*Math.exp(-exponent)
+        data[y*width+x] = intensity*Math.exp(-exponent)
     undefined
 
 module?.exports = Sersic
