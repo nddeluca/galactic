@@ -26,8 +26,9 @@ class Canvas
 
   #Puts the image data on the canvas for display.
   draw: ->
-    @canvasData.data.set(@canvasView8)
-    @context.putImageData(@canvasData,0,0)
+    cData = @canvasData
+    cData.data.set(@canvasView8)
+    @context.putImageData(cData,0,0)
     undefined
 
 module?.exports = Canvas
