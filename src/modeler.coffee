@@ -99,30 +99,31 @@ class Modeler
       @undo.splice(0,1)
     
   build: ->
-    width = @width
-    height = @height
-
-
+    length = @width*@height
     models = @getEnabledModels()
-    
+    imageData = @image.data
+
     if models.length == 0
-      console.log @image.data.length
-      console.log @width*@height
-      for index in [0..@width*@height]
-        @image.data[index] = 0
+      i = length
+      while i--
+        imageData[i] = 0
     else
       model = models.shift()
       model.build() if model.stale
-      for index in [0..@width*@height]
-        @image.data[index] = model.data[index]
+      modelData = model.data
+      i = length
+      while i--
+        imageData[i] = modelData[i]
 
       if models.length > 0
         for model in models
           model.build() if model.stale
-          for index in [0..@width*@height]
-            @image.data[index] += model.data[index]
+          modelData = model.data
+          i = length
+          while i--
+            imageData[i] += modelData[i]
 
-    @residual.build(@fitsData,@image.data)
+    @residual.build(@fitsData,imageData)
 
     undefined
 
