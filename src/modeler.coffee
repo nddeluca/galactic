@@ -61,7 +61,6 @@ class Modeler
     undefined
 
   updateParam: (name,param,value) ->
-    @saveUndo()
     model = @findModel(name)
     model.params[param] = value
     model.stale = true
