@@ -94,11 +94,9 @@ class Display extends Canvas
     
     height = @image.height
     width = @image.width
-
     invertCoeff = (height - 1)*width
     colorView = @colorView32
     canvasView = @canvasView32
-
     scaleRatio = @scaleRatio
     canvasWidth = @canvasWidth
     canvasHeight = @canvasHeight

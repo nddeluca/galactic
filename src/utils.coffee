@@ -3,8 +3,8 @@ utils =
   #Returns the maximum value of an array.
   max: (array) ->
     max = -Infinity
-    length = array.length
-    for i in [0..(length-1)]
+    i = array.length
+    while i--
       if array[i] > max
         max = array[i]
     max
@@ -12,8 +12,8 @@ utils =
   #Returns the mininum value of an array.
   min: (array) ->
     min = Infinity
-    length = array.length
-    for i in [0..(length-1)]
+    i = array.length
+    while i--
       if array[i] < min
         min = array[i]
     min
