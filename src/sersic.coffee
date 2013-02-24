@@ -44,10 +44,11 @@ class Sersic extends Model
     cy = @params.centerY
 
     width = @width
-    y = @height
+    height = @height
     x = width
 
     while x--
+      y = height
       while y--
         r_x = (x-cx)*cos+(y-cy)*sin
         r_y = ((y-cy)*cos-(x-cx)*sin)*invAxisRatio
