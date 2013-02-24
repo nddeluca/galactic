@@ -103,10 +103,10 @@ class Display extends Canvas
     canvasWidth = @canvasWidth
     canvasHeight = @canvasHeight
     
-    x = width
+    x = canvasWidth
     while x--
       coeff = ~~(x*scaleRatio) + invertCoeff
-      y = height
+      y = canvasHeight
       while y--
         canvasView[(canvasWidth*y)+x] = colorView[coeff - (~~(y*scaleRatio))*width]
     undefined
