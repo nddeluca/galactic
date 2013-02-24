@@ -100,9 +100,9 @@ class Display extends Canvas
     scaleRatio = @scaleRatio
     canvasWidth = @canvasWidth
     
-    for x in [(canvasWidth-1)..0] by 1
+    for x in [(canvasWidth-1)..0] by -1
       coeff = ~~(x*scaleRatio) + invertCoeff
-      for y in [(@canvasHeight-1)..0] by 1
+      for y in [(@canvasHeight-1)..0] by -1
         canvasView[(canvasWidth*y)+x] = colorView[coeff - (~~(y*scaleRatio))*width]
     undefined
     
