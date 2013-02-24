@@ -91,13 +91,24 @@ class Display extends Canvas
   processImage: ->
     @stretch(@image.data,@stretchView8,@min,@max)
     @colormap(@stretchView8,@colorView32)
+    
+    height = @image.height
+    width = @image.width
 
-    invertCoeff = (@image.height - 1)*@image.width
+    invertCoeff = (height - 1)*width
+    colorView = @colorView32
+    canvasView = @canvasView32
 
-    for x in [0..(@canvasWidth-1)]
-      coeff = ~~(x*@scaleRatio) + invertCoeff
-      for y in [0..(@canvasHeight-1)]
-        @canvasView32[(@canvasWidth*y)+x] = @colorView32[coeff - (~~(y*@scaleRatio))*@image.width]
+    scaleRatio = @scaleRatio
+    canvasWidth = @canvasWidth
+    canvasHeight = @canvasHeight
+    
+    x = width
+    while x--
+      coeff = ~~(x*scaleRatio) + invertCoeff
+      y = height
+      while y--
+        canvasView[(canvasWidth*y)+x] = colorView[coeff - (~~(y*scaleRatio))*width]
     undefined
     
 module?.exports = Display
