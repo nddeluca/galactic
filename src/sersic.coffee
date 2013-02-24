@@ -30,22 +30,19 @@ class Sersic extends Model
 
     n = @params.n
     invN = 1/n
-
-    norm = n*Math.exp(0.6950-0.1789*invN)
-    sin = Math.sin(@params.angle)
-    cos = Math.cos(@params.angle)
-
-    invAxisRatio = 1/@params.axisRatio
-    invEffRadius = @params.effRadius
-    invN = 1/@params.n
-    intensity = @params.intensity
-    
     cx = @params.centerX
     cy = @params.centerY
+    angle = @params.angle
+    invAxisRatio = 1/@params.axisRatio
+    invEffRadius = 1/@params.effRadius
+    intensity = @params.intensity
+
+    norm = n*Math.exp(0.6950-0.1789*invN)
+    sin = Math.sin(angle)
+    cos = Math.cos(angle)
 
     width = @width
     height = @height
-    x = width
 
     for x in [0..(width-1)]
       for y in [0..(height-1)]
