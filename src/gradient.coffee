@@ -26,11 +26,13 @@ class Gradient
       pos2 = color2.pos
       range = pos2-pos1
 
+      console.log color2
+      console.log color1
       for j in [range..0]
         r = ~~((color2.r - color1.r)*(j/range))
         g = ~~((color2.g - color1.g)*(j/range))
         b = ~~((color2.b - color1.b)*(j/range))
-        @gradient[pos1 + j] = @getPixel(r,g,b)
+        @gradient[pos1 + j] = @getPixel(color1.r + r,color1.g + g,color1.b + b)
 
 
 
