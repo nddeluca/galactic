@@ -83,11 +83,12 @@ class Display extends Canvas
   processImage: ->
     colorView = @colorView32
     canvasView = @canvasView32
-
-    @stretch(@image.data,colorView,@colormap.pixelMap,@min,@max)
-    
     height = @image.height
     width = @image.width
+
+    length = height*width
+    @stretch(@image.data,colorView,@colormap.pixelMap,@min,@max,length)
+    
     invertCoeff = (height - 1)*width
     scaleRatio = @scaleRatio
     canvasWidth = @canvasWidth
