@@ -4,7 +4,6 @@ class Colormap
   constructor: ->
     @initGradients()
     @initValues()
-    @generate()
 
   initGradients: ->
     @red = new Gradient()
