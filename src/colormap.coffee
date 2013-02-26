@@ -54,6 +54,8 @@ class Colormap
           level = stretchData[i]
           colorData[i] = (255 << 24) | (b[level] << 16) | (g[level] << 8) | r[level]
       else false
+
+  undefined
   
 
 module?.exports = Colormap
