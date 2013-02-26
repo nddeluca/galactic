@@ -29,7 +29,7 @@ class Gradient
       range = level2 - level1
       invRange = 1/range
       
-      j = range
+      j = range + 1
       while j--
         value = (intensity2-intensity1)*j*invRange + intensity1
         gradient[level1 + j] = ~~value
