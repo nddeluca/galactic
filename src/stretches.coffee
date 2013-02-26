@@ -5,7 +5,7 @@ stretches =
     i = imageData.length
     while i--
       value = ~~(255*((imageData[i] - min)*invRange))
-      level = if value < 255 then value else 255
+      level = Math.max(0,Math.min(value,255))
       colorData[i] = pixelMap[level]
     undefined
 
