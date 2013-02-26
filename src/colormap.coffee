@@ -59,7 +59,7 @@ class Colormap
 
     i = 256
     while i--
-      pixelMap[i] = (255 << 24) | (b[i] << 16) | (g[i] << 8) | r[i]
+      pixelMap[i] = (255 << 24) | (b.gradient[i] << 16) | (g.gradient[i] << 8) | r.gradient[i]
 
     undefined
 
