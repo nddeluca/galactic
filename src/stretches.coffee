@@ -16,7 +16,9 @@ stretches =
     
     i = imageData.length
     while i--
-       colorData[i] = pixelMap[~~(255*((Math.log(imageData[i] - min + 1)*invLN10)*invMaxLog))]
+      value = ~~(255*((Math.log(imageData[i] - min + 1)*invLN10)*invMaxLog))
+      level = Math.max(0,Math.min(value,255))
+      colorData[i] = pixelMap[level]
     undefined
 
   power: (imageData,colorData,pixelMap,min,max) ->
@@ -48,7 +50,7 @@ stretches =
     i = imageData.length
     while i--
       tmp = imageData[i] - min
-      value = ~~(255*(Math.log(point + Math.sqrt(tmp*tmp + 1)))*invMaxAsinh)
+      value = ~~(255*(Math.log(tmp + Math.sqrt(tmp*tmp + 1)))*invMaxAsinh)
       level = Math.max(0,Math.min(value,255))
       colorData[i] = pixelMap[level]
     undefined
