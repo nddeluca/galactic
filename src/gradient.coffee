@@ -3,7 +3,7 @@ class Gradient
   
   constructor: ->
     @max = 255
-    @buffer = new ArrayBuffer(255)
+    @buffer = new ArrayBuffer(256)
     @gradient = new Uint8ClampedArray(@buffer)
     @entries = []
 
@@ -31,7 +31,7 @@ class Gradient
      
       for j in [range..0]
         value = (intensity2-intensity1)*j*invRange + intensity1
-        @gradient[level1 + range] = ~~value
+        @gradient[level1 + j] = ~~value
         
 
 
