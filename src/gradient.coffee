@@ -8,7 +8,7 @@ class Gradient
     @colors = []
     @type = 'linear'
 
-  addColor: (red,blue,green,position) ->
+  addColor: (red,blue,green,position) =>
     color = {
       r: red
       g: green
