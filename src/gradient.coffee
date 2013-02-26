@@ -25,7 +25,8 @@ class Gradient
       intensity1 = entry1.intensity
       intensity2 = entry2.intensity
 
-      invRange = 1/(level2 - level1)
+      range = level2 - level1
+      invRange = 1/range
       
      
       for j in [range..0]
