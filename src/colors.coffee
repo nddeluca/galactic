@@ -25,7 +25,7 @@ colors =
     #
   gray: ->
     map = {
-      type: 'SAO'
+      type: "SAO"
       red:
         level: [0,1]
         intensity: [0,1]
@@ -37,7 +37,7 @@ colors =
         intensity: [0,1] }
   
   heat: {
-    type: 'SAO'
+    type: "SAO"
     red:
       level: [0,0.34,1]
       intensity: [0,1,1]
