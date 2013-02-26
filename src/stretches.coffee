@@ -2,7 +2,7 @@
 stretches =
   linear: (imageData,colorData,pixelMap,min,max) ->
     console.log min
-    console.log max
+    console.log imageData.length
     invRange = 1/(max-min)
     i = imageData.length
     while i--
