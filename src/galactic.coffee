@@ -26,5 +26,8 @@ Galactic.Residual = require('./residual')
 #Common functions that don't belong to a class.
 Galactic.utils = require ('./utils')
 
+Galactic.Gradient = require('./gradient')
+Galactic.Colormap = require('./colormap')
+
 
 module?.exports = Galactic
