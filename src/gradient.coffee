@@ -14,7 +14,7 @@ class Gradient
     @entries.push(entry)
 
   build: ->
-    entires = @entires
+    entries = @entries
     i = entries.length-1
     while i--
       entry1 = entries[i]
