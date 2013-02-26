@@ -9,8 +9,8 @@ class Gradient
 
   add: (level,intensity) ->
     entry = {
-      level: level
-      intensity: intensity }
+      level: ~~(255*level)
+      intensity: ~~(255*intensity) }
     @entries.push(entry)
 
   build: ->
@@ -31,7 +31,7 @@ class Gradient
      
       for j in [range..0]
         value = (intensity2-intensity1)*j*invRange + intensity1
-        @gradient[level1 + range] = ~~(255*value)
+        @gradient[level1 + range] = ~~value
         
 
 

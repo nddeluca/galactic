@@ -9,7 +9,7 @@ colors =
     undefined
 
   heat: (stretchData,colorData) ->
-    map = new Colormap('heat')
+    map = new Colormap()
     i = stretchData.length
     while i--
       colorData[i] = map.getValue(stretchData[i])
