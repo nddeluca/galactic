@@ -30,8 +30,8 @@ class Colormap
     bLevel = map.blue.level
     bIntensity = map.blue.intensity
 
-    for i in [0..rlevel.length-1]
-      r.add(rlevel[i],rIntensity[i])
+    for i in [0..rLevel.length-1]
+      r.add(rLevel[i],rIntensity[i])
     for i in [0..gLevel.length-1]
       g.add(gLevel[i],gIntensity[i])
     for i in [0..bLevel.length-1]
