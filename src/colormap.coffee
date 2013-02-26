@@ -2,6 +2,7 @@ Gradient = require('./gradient')
 
 class Colormap
   constructor: (map) ->
+    console.log map
     @setMap(map)
 
   setMap: (map) ->
