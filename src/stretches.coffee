@@ -22,12 +22,12 @@ stretches =
   power: (imageData,colorData,pixelMap,min,max) ->
     range = max - min
     invMaxPow = 1/(range*range)
-
-    
     i = imageData.length
     while i--
-      value = imageData[i] - min
-      colorData[i] = pixelMap[~~(255*((value*value)*invMaxPow))]
+      tmp = imageData[i] - min
+      value = ~~(255*((tmp*tmp)*invMaxPow))
+      level = Math.max(0,Math.min(value,255))
+      colorData[i] = pixelMap[level]
     undefined
 
   sqrt: (imageData,colorData,pixelMap,min,max) ->
@@ -36,7 +36,9 @@ stretches =
 
     i = imageData.length
     while i--
-      colorData[i] = pixelMap[~~(255*((Math.sqrt(imageData[i] - min))*invMaxSqrt))]
+      value = ~~(255*((Math.sqrt(imageData[i] - min))*invMaxSqrt))
+      level = Math.max(0,Math.min(value,255))
+      colorData[i] = pixelMap[level]
     undefined
 
   arcsinh: (imageData,colorData,pixelMap,min,max) ->
@@ -45,9 +47,10 @@ stretches =
     invMaxAsinh = 1/max_asinh
     i = imageData.length
     while i--
-      point = imageData[i] - min
-      value = Math.log(point + Math.sqrt(point*point + 1))
-      colorData[i] = pixelMap[~~(255*(value*invMaxAsinh))]
+      tmp = imageData[i] - min
+      value = ~~(255*(Math.log(point + Math.sqrt(tmp*tmp + 1)))*invMaxAsinh)
+      level = Math.max(0,Math.min(value,255))
+      colorData[i] = pixelMap[level]
     undefined
 
 module?.exports = stretches
