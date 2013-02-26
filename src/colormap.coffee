@@ -2,6 +2,8 @@ Gradient = require('./gradient')
 
 class Colormap
   constructor: (map) ->
+    @buffer = new ArrayBuffer(256*4)
+    @pixelMap = new Uint32Array(@buffer)
     @setMap(map)
 
   setMap: (map) ->
@@ -16,8 +18,22 @@ class Colormap
         true
       else false
 
+  loadLUT: ->
+    map = @map
+
+    length = map.red.length
+    increment = 256/length
+
+    r = (new Gradient()).gradient
+    g = (new Gradient()).gradient
+    b = (new Gradient()).gradient
+
+    
+   
+
   loadSAO: ->
     map = @map
+    pixelMap = @pixelMap
 
     r = new Gradient()
     g = new Gradient()
@@ -41,23 +57,23 @@ class Colormap
     g.build()
     b.build()
 
-    @red = r
-    @green = g
-    @blue = b
+    i = 256
+    while i--
+      pixelMap[i] = (255 << 24) | (b[i] << 16) | (g[i] << 8) | r[i]
 
+    undefined
 
-  colorize: (stretchData,colorData) ->
-    type = @map.type
-
-    if type == "SAO"
-      i = stretchData.length
-      r = @red.gradient
-      g = @green.gradient
-      b = @blue.gradient
-      while i--
-        level = stretchData[i]
-        colorData[i] = (255 << 24) | (b[level] << 16) | (g[level] << 8) | r[level]
-      undefined
+  #colorize: (stretchData,colorData) ->
+    #type = @map.type
+    #if type == "SAO"
+      #i = stretchData.length
+      #r = @red.gradient
+      #g = @green.gradient
+      #b = @blue.gradient
+      #while i--
+        #level = stretchData[i]
+        #colorData[i] = (255 << 24) | (b[level] << 16) | (g[level] << 8) | r[level]
+      #undefined
   
   
 

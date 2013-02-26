@@ -1,10 +1,11 @@
 #Contains the different functions used to stretch the image on the display.
 stretches =
-  linear: (imageData,stretchData,min,max) ->
+  linear: (imageData,colorData,pixelMap,min,max) ->
     invRange = 1/(max-min)
     i = stretchData.length
     while i--
-      stretchData[i] = ~~(255*((imageData[i] - min)*invRange))
+      value = ~~(255*((imageData[i] - min)*invRange))
+      colorData[i] = pixelMap[value]
     undefined
 
   log: (imageData,stretchData,min,max) ->
