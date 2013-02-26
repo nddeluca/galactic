@@ -28,8 +28,6 @@ class Colormap
     g = (new Gradient()).gradient
     b = (new Gradient()).gradient
 
-    
-   
 
   loadSAO: ->
     map = @map
@@ -57,28 +55,12 @@ class Colormap
     g.build()
     b.build()
     
-    @red = r
-    @blue = b
-    @green = g
-
+   
     i = 256
     while i--
       pixelMap[i] = (255 << 24) | (b.gradient[i] << 16) | (g.gradient[i] << 8) | r.gradient[i]
 
     undefined
-
-  colorize: (stretchData,colorData) ->
-    type = @map.type
-    if type == "SAO"
-      i = stretchData.length
-      r = @red.gradient
-      g = @green.gradient
-      b = @blue.gradient
-      while i--
-        level = stretchData[i]
-        colorData[i] = (255 << 24) | (b[level] << 16) | (g[level] << 8) | r[level]
-      undefined
-  
   
 
 module?.exports = Colormap

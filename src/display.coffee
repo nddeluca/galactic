@@ -32,7 +32,6 @@ class Display extends Canvas
     @scaleRatio = @image.width/scaledWidth
     scaledHeight = ~~(@image.height/@scaleRatio)
     
-    @buildStretchBuffers()
     @buildColorBuffers()
     
     @stretch = stretches.linear
@@ -64,14 +63,7 @@ class Display extends Canvas
         true
       else false
 
-  #Initializes the ArrayBuffer and Uint8ClampedArray used
-  #to store the image data after it has been processed by
-  #one of the stretch functions.  The values stored in this array
-  #must be 0-255 integers, hence the 8-bit clamped array.
-  buildStretchBuffers: ->
-    @stretchBuffer = new ArrayBuffer(@image.width*@image.height)
-    @stretchView8 = new Uint8ClampedArray(@stretchBuffer)
-    undefined
+
 
   #Initilizes the ArrayBuffer for storing RBGA pixel data.
   #An 8-bit and 32-bit UintArray's are provided for the buffer.
@@ -89,13 +81,10 @@ class Display extends Canvas
   #algorithm to fit the size of the canvas.  Also, the y-axis is flipped
   #to accomadate the origin location on the HTML5 canvas.
   processImage: ->
-    stretchView = @stretchView8
     colorView = @colorView32
     canvasView = @canvasView32
 
-    @stretch(@image.data,stretchView,@min,@max)
-    #@stretch(@image.data,colorView,@colormap.pixelMap,@min,@max)
-    @colormap.colorize(stretchView,colorView)
+    @stretch(@image.data,colorView,@colormap.pixelMap,@min,@max)
     
     height = @image.height
     width = @image.width
