@@ -4,7 +4,8 @@ stretches =
     invRange = 1/(max-min)
     i = imageData.length
     while i--
-      colorData[i] = pixelMap[ ~~(255*((imageData[i] - min)*invRange))]
+      level = ~~(255*((imageData[i] - min)*invRange))
+      colorData[i] = pixelMap[level]
     undefined
 
   log: (imageData,colorData,pixelMap,min,max) ->

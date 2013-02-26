@@ -54,7 +54,6 @@ class Colormap
     r.build()
     g.build()
     b.build()
-    
    
     i = 256
     while i--
