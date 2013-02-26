@@ -64,7 +64,6 @@ class Display extends Canvas
         true
       else false
 
-  
   #Initializes the ArrayBuffer and Uint8ClampedArray used
   #to store the image data after it has been processed by
   #one of the stretch functions.  The values stored in this array
