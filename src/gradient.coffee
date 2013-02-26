@@ -11,8 +11,8 @@ class Gradient
   addColor: (red,blue,green,position) ->
     color = {
       r: red
-      b: blue
       g: green
+      b: blue
       pos: position }
     @colors.push(color)
 
@@ -28,14 +28,14 @@ class Gradient
 
       for j in [range..0]
         r = ~~((color2.r - color1.r)*(j/range))
-        b = ~~((color2.b - color1.b)*(j/range))
-        g = ~~((color2.g - color2.g)*(j/range))
-        @gradient[pos1 + j] = @getPixel(r,b,g)
+        g = ~~((color2.g - color1.g)*(j/range))
+        b = ~~((color2.b - color2.b)*(j/range))
+        @gradient[pos1 + j] = @getPixel(r,g,b)
 
 
 
-  getPixel: (r,b,g) ->
-    (255 << 24) | (r << 16) | (b << 8) | g
+  getPixel: (r,g,b) ->
+    (255 << 24) | (r << 16) | (g << 8) | b
 
 
 module?.exports = Gradient
