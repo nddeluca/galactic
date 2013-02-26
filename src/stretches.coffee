@@ -5,7 +5,8 @@ stretches =
     i = imageData.length
     while i--
       level = ~~(255*((imageData[i] - min)*invRange))
-      console.log level
+      if level > 255
+        console.log "overfow"
       colorData[i] = pixelMap[level]
     undefined
 
