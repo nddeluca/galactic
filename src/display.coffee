@@ -11,6 +11,7 @@ stretches = require('./stretches')
 colors = require('./colors')
 utils = require('./utils')
 Image = require('./image')
+ColorMap = require('./colormap')
 
 class Display extends Canvas
   #Initializes all the required information
@@ -94,7 +95,7 @@ class Display extends Canvas
     canvasView = @canvasView32
 
     @stretch(@image.data,stretchView,@min,@max)
-    @colormap.setValues(stretchView,colorView)
+    @colormap.colorize(stretchView,colorView)
     
     height = @image.height
     width = @image.width
