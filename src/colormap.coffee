@@ -6,7 +6,7 @@ class Colormap extends Gradient
     @initColors()
     @generate()
 
-  initGradient: ->
+  initColors: ->
     add = @addColor
     add(0,0,0,0)
     add(255,127,0,63)
