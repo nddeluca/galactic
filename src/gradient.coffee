@@ -2,42 +2,39 @@
 class Gradient
   
   constructor: ->
-    @range = 256
+    @max = 255
     @buffer = new ArrayBuffer(@range*4)
     @gradient = new Uint32Array(@buffer)
-    @colors = []
-    @type = 'linear'
+    @entries = []
 
-  addColor: (red,green,blue,position) =>
-    color = {
-      r: red
-      g: green
-      b: blue
-      pos: position }
-    @colors.push(color)
+  add: (level,intensity) ->
+    entry = {
+      level: level
+      intensity: intensity }
+    @entries.push(entry)
 
-  generate: ->
-    colors = @colors
-    i = colors.length-1
+  build: ->
+    entires = @entires
+    i = entries.length-1
     while i--
-      color2 = colors[i+1]
-      color1 = colors[i]
-      pos1 = color1.pos
-      pos2 = color2.pos
-      range = pos2-pos1
+      entry1 = entries[i]
+      entry2 = entries[i+1]
 
-      console.log color2
-      console.log color1
+      level1 = entry1.level
+      level2 = entry2.level
+      intensity1 = entry1.intensity
+      intensity2 = entry2.intensity
+
+      invRange = 1/(level2 - level1)
+      
+     
       for j in [range..0]
-        r = ~~((color2.r - color1.r)*(j/range))
-        g = ~~((color2.g - color1.g)*(j/range))
-        b = ~~((color2.b - color1.b)*(j/range))
-        @gradient[pos1 + j] = @getPixel(color1.r + r,color1.g + g,color1.b + b)
+        value = (intensity2-intensity1)*j*invRange + intensity1
+	@gradient[level1+range] = ~~(255*value)
+        
 
 
 
-  getPixel: (r,g,b) ->
-    (255 << 24) | (b << 16) | (g << 8) | r
 
 
 module?.exports = Gradient
