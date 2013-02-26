@@ -56,6 +56,10 @@ class Colormap
     r.build()
     g.build()
     b.build()
+    
+    @red = r
+    @blue = b
+    @green = g
 
     i = 256
     while i--
