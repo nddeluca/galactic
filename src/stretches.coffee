@@ -1,6 +1,8 @@
 #Contains the different functions used to stretch the image on the display.
 stretches =
   linear: (imageData,colorData,pixelMap,min,max) ->
+    console.log min
+    console.log max
     invRange = 1/(max-min)
     i = imageData.length
     while i--
