@@ -56,7 +56,7 @@ class Colormap
       b = @blue.gradient
       while i--
         level = stretchData[i]
-        colorData[i] = (255 << 24) | (level << 16) | (level << 8) | level
+        colorData[i] = (255 << 24) | (b[level] << 16) | (g[level] << 8) | r[level]
       undefined
   
   
