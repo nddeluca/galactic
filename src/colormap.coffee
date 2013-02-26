@@ -1,4 +1,4 @@
-Gradient = require('./gradient.coffee')
+Gradient = require('./gradient')
 
 class Colormap extends Gradient
   constructor: ->
