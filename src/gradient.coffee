@@ -2,7 +2,6 @@
 class Gradient
   
   constructor: ->
-    @max = 255
     @buffer = new ArrayBuffer(256)
     @gradient = new Uint8ClampedArray(@buffer)
     @entries = []
@@ -14,7 +13,9 @@ class Gradient
     @entries.push(entry)
 
   build: ->
+    gradient = @gradient
     entries = @entries
+
     i = entries.length-1
     while i--
       entry1 = entries[i]
@@ -28,14 +29,10 @@ class Gradient
       range = level2 - level1
       invRange = 1/range
       
-     
-      for j in [range..0]
+      j = range
+      while j--
         value = (intensity2-intensity1)*j*invRange + intensity1
-        @gradient[level1 + j] = ~~value
+        gradient[level1 + j] = ~~value
         
-
-
-
-
 
 module?.exports = Gradient
