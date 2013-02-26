@@ -2,9 +2,10 @@
 stretches =
   linear: (imageData,colorData,pixelMap,min,max) ->
     invRange = 1/(max-min)
-    i = colorData.length
+    i = imageData.length
     while i--
-      level = ~~(255*((imageData[i] - min)*invRange))
+      value = ~~(255*((imageData[i] - min)*invRange))
+      level = if value < 255 then value else 255
       colorData[i] = pixelMap[level]
     undefined
 

@@ -86,8 +86,7 @@ class Display extends Canvas
     height = @image.height
     width = @image.width
 
-    length = height*width
-    @stretch(@image.data,colorView,@colormap.pixelMap,@min,@max,length)
+    @stretch(@image.data,colorView,@colormap.pixelMap,@min,@max)
     
     invertCoeff = (height - 1)*width
     scaleRatio = @scaleRatio
