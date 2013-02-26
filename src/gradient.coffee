@@ -35,7 +35,7 @@ class Gradient
 
 
   getPixel: (r,g,b) ->
-    (255 << 24) | (r << 16) | (g << 8) | b
+    (255 << 24) | (b << 16) | (g << 8) | r
 
 
 module?.exports = Gradient
