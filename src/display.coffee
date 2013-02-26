@@ -36,7 +36,7 @@ class Display extends Canvas
     @buildColorBuffers()
     
     @stretch = stretches.linear
-    @map = new Colormap(colors.gray)
+    @colormap = new Colormap(colors.gray)
 
     super container,scaledWidth,scaledHeight
 
@@ -94,7 +94,7 @@ class Display extends Canvas
     canvasView = @canvasView32
 
     @stretch(@image.data,stretchView,@min,@max)
-    @map.colorize(stretchView,colorView)
+    @colormap.colorize(stretchView,colorView)
     
     height = @image.height
     width = @image.width
