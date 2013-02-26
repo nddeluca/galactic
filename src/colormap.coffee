@@ -1,40 +1,59 @@
 Gradient = require('./gradient')
 
 class Colormap
-  constructor: ->
-    @initGradients()
-    @initValues()
+  constructor: (map) ->
+    @setMap(map)
 
-  initGradients: ->
-    @red = new Gradient()
-    @green = new Gradient()
-    @blue = new Gradient()
+  setMap: (map) ->
+    switch map.type
+      when "LUT"
+        @map = map
+        @loadLUT()
+        true
+      when "SAO"
+        @map = map
+        @loadSAO()
+        true
+      else false
 
-  initValues: ->
-    r = @red
-    g = @green
-    b = @blue
+  loadSAO: ->
+    map = @map
 
-    r.add(0,0)
-    r.add(0.34,1)
-    r.add(1,1)
-    g.add(0,0)
-    g.add(1,1)
-    b.add(0,0)
-    b.add(0.65,0)
-    b.add(0.98,1)
-    b.add(1,1)
+    r = new Gradient()
+    g = new Gradient()
+    b = new Gradient()
 
-    r.build()
-    g.build()
-    b.build()
+    rLevel = map.red.level
+    rIntensity = map.red.intensity
+    gLevel = map.green.level
+    gIntensity = map.green.intensity
+    bLevel = map.blue.level
+    bIntensity = map.blue.intensity
 
+    for i in [0..rlevel.length-1]
+      r.add(rlevel[i],rIntensity[i])
+    for i in [0..gLevel.length-1]
+      g.add(gLevel[i],gIntensity[i])
+    for i in [0..bLevel.length-1]
+      b.add(bLevel[i],bIntensity[i])
+    
+    @red = r
+    @green = g
+    @blue = b
 
-  getValue: (level) ->
-    r = @red.gradient[level]
-    g = @green.gradient[level]
-    b = @blue.gradient[level]
-    (255 << 24) | (b << 16) | (g << 8) | r
+  colorize: (stretchData,colorData) ->
+    type = @map.type
+
+    switch type
+      when "SAO"
+        i = stretchData.length
+        r = @red.gradient
+        g = @green.gradient
+        b = @blue.gradient
+        while i--
+          level = stretchData[i]
+          colorData[i] = (255 << 24) | (b[level] << 16) | (g[level] << 8) | r[level]
+      else false
   
 
 module?.exports = Colormap

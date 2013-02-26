@@ -2,7 +2,6 @@
 stretches =
   linear: (imageData,stretchData,min,max) ->
     invRange = 1/(max-min)
-
     i = stretchData.length
     while i--
       stretchData[i] = ~~(255*((imageData[i] - min)*invRange))
