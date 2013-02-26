@@ -3,8 +3,8 @@ class Gradient
   
   constructor: ->
     @max = 255
-    @buffer = new ArrayBuffer(@range*4)
-    @gradient = new Uint32Array(@buffer)
+    @buffer = new ArrayBuffer(255)
+    @gradient = new Uint8ClampedArray(@buffer)
     @entries = []
 
   add: (level,intensity) ->
