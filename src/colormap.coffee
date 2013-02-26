@@ -2,7 +2,6 @@ Gradient = require('./gradient')
 
 class Colormap
   constructor: ->
-    super
     @initGradients()
     @initValues()
     @generate()
