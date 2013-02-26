@@ -37,11 +37,14 @@ class Colormap
     for i in [0..bLevel.length-1]
       b.add(bLevel[i],bIntensity[i])
     
+    r.build()
+    g.build()
+    b.build()
+
     @red = r
     @green = g
     @blue = b
 
-    console.log @red.gradient
 
   colorize: (stretchData,colorData) ->
     type = @map.type

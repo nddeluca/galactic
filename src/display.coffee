@@ -95,7 +95,6 @@ class Display extends Canvas
     canvasView = @canvasView32
 
     @stretch(@image.data,stretchView,@min,@max)
-    console.log @map
     @map.colorize(stretchView,colorView)
     
     height = @image.height
