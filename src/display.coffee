@@ -11,7 +11,7 @@ stretches = require('./stretches')
 colors = require('./colors')
 utils = require('./utils')
 Image = require('./image')
-ColorMap = require('./colormap')
+Colormap = require('./colormap')
 
 class Display extends Canvas
   #Initializes all the required information
@@ -36,7 +36,7 @@ class Display extends Canvas
     @buildColorBuffers()
     
     @stretch = stretches.linear
-    @colormap = new ColorMap(colors.heat)
+    @colormap = new Colormap(colors.heat)
 
     super container,scaledWidth,scaledHeight
 
