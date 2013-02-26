@@ -89,12 +89,13 @@ class Display extends Canvas
   #algorithm to fit the size of the canvas.  Also, the y-axis is flipped
   #to accomadate the origin location on the HTML5 canvas.
   processImage: ->
-    #stretchView = @stretchView8
+    stretchView = @stretchView8
     colorView = @colorView32
     canvasView = @canvasView32
 
-    @stretch(@image.data,colorView,@colormap.pixelMap,@min,@max)
-    #@colormap.colorize(stretchView,colorView)
+    @stretch(@image.data,stretchView,@min,@max)
+    #@stretch(@image.data,colorView,@colormap.pixelMap,@min,@max)
+    @colormap.colorize(stretchView,colorView)
     
     height = @image.height
     width = @image.width

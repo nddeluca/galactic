@@ -63,17 +63,17 @@ class Colormap
 
     undefined
 
-  #colorize: (stretchData,colorData) ->
-    #type = @map.type
-    #if type == "SAO"
-      #i = stretchData.length
-      #r = @red.gradient
-      #g = @green.gradient
-      #b = @blue.gradient
-      #while i--
-        #level = stretchData[i]
-        #colorData[i] = (255 << 24) | (b[level] << 16) | (g[level] << 8) | r[level]
-      #undefined
+  colorize: (stretchData,colorData) ->
+    type = @map.type
+    if type == "SAO"
+      i = stretchData.length
+      r = @red.gradient
+      g = @green.gradient
+      b = @blue.gradient
+      while i--
+        level = stretchData[i]
+        colorData[i] = (255 << 24) | (b[level] << 16) | (g[level] << 8) | r[level]
+      undefined
   
   
 
