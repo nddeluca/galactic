@@ -36,7 +36,7 @@ class Display extends Canvas
     @buildColorBuffers()
     
     @stretch = stretches.linear
-    @map = new Colormap(colors.heat)
+    @map = new Colormap(colors.gray)
 
     super container,scaledWidth,scaledHeight
 
