@@ -64,6 +64,46 @@ class Display extends Canvas
       else false
 
 
+  setColormap: (map) ->
+    switch map
+      when "gray"
+        @colormap.setMap(colors.gray)
+        true
+      when "red"
+        @colormap.setMap(colors.red)
+        true
+      when "green"
+        @colormap.setMap(colors.green)
+        true
+      when "blue"
+        @colormap.setMap(colors.blue)
+        true
+      when "heat"
+        @colormap.setMap(colors.heat)
+        true
+      when "a"
+        @colormap.setMap(colors.a)
+        true
+      when "b"
+        @colormap.setMap(colors.b)
+        true
+      when "bb"
+        @colormap.setMap(colors.bb)
+        true
+      when "cool"
+        @colormap.setMap(colors.cool)
+        true
+      when "he"
+        @colormap.setMap(colors.he)
+        true
+      when "rainbow"
+        @colormap.setMap(colors.rainbow)
+      when "standard"
+        @colormap.setMap(colors.standard)
+        true
+      else false
+
+
 
   #Initilizes the ArrayBuffer for storing RBGA pixel data.
   #An 8-bit and 32-bit UintArray's are provided for the buffer.
