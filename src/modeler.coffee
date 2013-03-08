@@ -82,7 +82,7 @@ class Modeler
       @models = @undo[0]
       @undo.splice(0,1)
 
-  @toJSON: ->
+  toJSON: ->
     JSON.stringify(@models)
     
   build: ->
