@@ -15,6 +15,9 @@ class Sersic extends Model
      'intensity',
      'n']
 
+  toJSON: ->
+    JSON.stringify(@params)
+
   initDefaultParams: ->
     @params =
       centerX: 31.5
