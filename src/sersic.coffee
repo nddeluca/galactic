@@ -54,7 +54,7 @@ class Sersic extends Model
         r_x = (x-cx)*cos+(y-cy)*sin
         r_y = ((y-cy)*cos-(x-cx)*sin)*invAxisRatio
         r = Math.sqrt(r_x*r_x + r_y*r_y)
-        exponent = norm*Math.pow(r*invEffRadius,invN) - 1
+        exponent = norm*(Math.pow(r*invEffRadius,invN) - 1)
         data[y*width+x] = intensity*Math.exp(-exponent)
     undefined
 
