@@ -41,7 +41,11 @@ class Sersic extends Model
     invEffRadius = 1/@params.effRadius
     intensity = @params.intensity
 
-    norm = n*Math.exp(0.6950-0.1789*invN)
+    if n ==4
+      norm = 7.669
+    else
+      norm = n*Math.exp(0.6950-0.1789*invN)
+
     sin = Math.sin(angle)
     cos = Math.cos(angle)
 
