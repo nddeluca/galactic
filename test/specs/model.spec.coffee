@@ -1,3 +1,4 @@
+require('../spec_helper')
 Model = require('../../src/model')
 Image = require('../../src/image')
 
