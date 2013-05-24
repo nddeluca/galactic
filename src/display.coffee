@@ -9,7 +9,7 @@
 Canvas = require('./canvas')
 stretches = require('./stretches')
 colors = require('./colors')
-utils = require('./utils')
+utils = require('./utils/arrayutils')
 Image = require('./image')
 Colormap = require('./colormap')
 

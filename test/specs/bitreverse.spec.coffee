@@ -1,4 +1,4 @@
-revbin = require('../../src/bitutils/bitreverse')
+revbin = require('../../src/utils/bitreverse')
 
 describe 'bitreverse', ->
   describe 'reverse a 32-bit unsigned int', ->

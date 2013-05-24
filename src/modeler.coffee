@@ -2,7 +2,7 @@ Residual = require('./residual')
 Model = require('./model')
 Sersic = require('./sersic')
 Image = require('./image')
-utils = require('./utils')
+utils = require('./utils/arrayutils')
 
 class Modeler
 

@@ -24,7 +24,9 @@ Galactic.Sersic = require('./sersic')
 Galactic.Residual = require('./residual')
 
 #Common functions that don't belong to a class.
-Galactic.utils = require ('./utils')
+Galactic.utils.arrayutils = require ('./utils/arrayutils')
+Galactic.utils.bitswap = require ('./utils/bitswap')
+Galactic.utils.bitreverse = require('./utils/bitreverse')
 
 Galactic.Gradient = require('./gradient')
 Galactic.Colormap = require('./colormap')

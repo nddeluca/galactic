@@ -1,5 +1,5 @@
 require('../spec_helper')
-bitswap = require('../../src/bitutils/bitswap')
+bitswap = require('../../src/utils/bitswap')
 
 describe 'bitswap', -> 
   describe 'on unsigned intergers', ->
