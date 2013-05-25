@@ -1,8 +1,14 @@
 var fft = require('../../lib/math/realfftsplitradix');
 
-n = 16;
+MAX = 10;
+n = 1024*1024;
 
-var x = [];
+var start = (new Date).getTime()
+
+var buffer = new ArrayBuffer(4*2*n);
+
+var x = new Float32Array(buffer)
+
 
 var l = 2*Math.PI;
 
@@ -15,11 +21,12 @@ for(var i=n; i < 2*n;i++){
   x[i]=0;
 }
 
+var diff = (new Date).getTime() - start
 
-var start = (new Date).getTime();
+console.log("Init Time: " + diff);
+
+start = (new Date).getTime();
 fft.realfft(x,2*n);
-var diff = (new Date).getTime() - start;
+diff = (new Date).getTime() - start;
 
-console.log(x)
-
-console.log(diff)
+console.log("FFT Time: " + diff)
