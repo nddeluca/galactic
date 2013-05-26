@@ -28,7 +28,6 @@ fft =
       ix = (id-1) << 1
       id = id << 2
     #END OUT LOOP 1
-
     #START OUTER LOOP 2
     n2 = 2
     nn = n >>> 1
@@ -88,6 +87,7 @@ fft =
         cc1 = cos(a)
         cc3 = 4*cc1*(cc1*cc1-0.75)
         ss3 = 4*ss1*(0.75-ss1*ss1)
+
         #START DO-WHILE 2
         ix = 0
         id = n2 << 1
@@ -127,7 +127,9 @@ fft =
             t1 = st1 + t5
             x[i6] = st1 - t5
             x[i1] = t1
-            x[i5] = x[i5] - t4
+            st1 = x[i5]
+            t1 = st1 + t4
+            x[i5] = st1 - t4
             x[i2] = t1
             i0 = i0 + id
           #END INNER LOOP 3

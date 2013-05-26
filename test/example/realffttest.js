@@ -5,11 +5,8 @@ n = 1024*1024;
 
 var start = (new Date).getTime()
 
-var buffer = new ArrayBuffer(4*2*n);
-
-var x = new Float32Array(buffer)
-
-
+var buffer = new ArrayBuffer(8*2*n);
+var x = new Float64Array(buffer)
 var l = 2*Math.PI;
 
 for( var i=0; i < n;i++){
