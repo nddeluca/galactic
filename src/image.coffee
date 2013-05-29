@@ -23,20 +23,4 @@ class Image
   default_height: ->
     512
 
-    #getRow: (r) ->
-    #row = @row
-    #data = @data
-    #x = @width
-    #while x--
-    #row[x] = data[x + r*width]
-    #row
-
-    #getColumn: (c) ->
-    #column = @column
-    #data = @data
-    #width = @width
-    #y = @height
-    #while y--
-    #column[y] = data[c + y*width]
-
 module?.exports = Image
