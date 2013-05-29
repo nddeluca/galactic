@@ -97,8 +97,8 @@ diff  = (new Date).getTime() - start
 console.log("Core DIT Radix-4 Time: " + diff);
 
 //--------------------------
-//
-n = 16;
+
+n = 8;
 x = []
 y = []
 
@@ -116,21 +116,22 @@ console.log(y);
 
 var ldn = Math.log(n)/Math.LN2
 
-fftdif4(x,y,ldn);
+//fftdif4(x,y,ldn);
 
-//utils.revbin_permute(x,n)
-//utils.revbin_permute(y,n)
+utils.revbin_permute(x,n)
+utils.revbin_permute(y,n)
 
-//fftdit4(x,y,ldn)
+fftdit4(x,y,ldn)
 
 console.log("***********Values After Transform**********")
+
 console.log(x)
 console.log(y)
 
 //fftdif4(y,x,ldn);
 
-//utils.revbin_permute(x,n)
-////utils.revbin_permute(y,n)
+utils.revbin_permute(x,n)
+utils.revbin_permute(y,n)
 
 fftdit4(y,x,ldn);
 

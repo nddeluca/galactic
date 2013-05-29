@@ -32,7 +32,7 @@ fft_dit4_core = (fr,fi,ldn) ->
     i0 = 0
     while i0 < n
       fft8_dit_core(fr,fi,i0)
-      i0 += 4
+      i0 += 8
   else
     i0 = 0
     while i0 < n
