@@ -8,7 +8,7 @@ describe 'Image', ->
   height = 100
 
   beforeEach ->
-    image = new Image(width,height)
+    image = new Image()
 
   describe 'instance variables', ->
 
@@ -24,10 +24,8 @@ describe 'Image', ->
     it 'should have a data array', ->
       expect(image.data).toBeDefined()
 
-    describe 'buffer', ->
 
-      it 'should have the correct byteLength', ->
-        expect(image.buffer.byteLength).toBe width*height*4
+    describe 'buffer', ->
 
       it 'should be an ArrayBuffer', ->
         expect(image.buffer).toBeType('ArrayBuffer')
@@ -38,7 +36,5 @@ describe 'Image', ->
         expect(image.data.buffer).toEqual image.buffer
 
       it 'should have the correct length', ->
-        expect(image.data.length).toBe width*height
+        expect(image.data.length).toBe image.width*image.height
 
-      it 'should be a Float32Array', ->
-        expect(image.data).toBeType('Float32Array')
