@@ -21,8 +21,8 @@ var padder1 = new ImagePadder({image: model1, type: Image});
 var padder2 = new ImagePadder({image: model2, type: Image});
 
 
-var iimg1 = new Image({ width: padder1.paddedImage.width, height: padder1.paddedImage.height, dataType: Float32Array});
-var iimg2 = new Image({ width: padder1.paddedImage.width, height: padder1.paddedImage.height, dataType: Float32Array});
+var iimg1 = new Image({ width: padder1.paddedImage.width, height: padder1.paddedImage.height, dataType: Float64Array});
+var iimg2 = new Image({ width: padder1.paddedImage.width, height: padder1.paddedImage.height, dataType: Float64Array});
 
 var rowMan1 = new RowManipulator(padder1.paddedImage);
 var columnMan1 = new ColumnManipulator(padder1.paddedImage);

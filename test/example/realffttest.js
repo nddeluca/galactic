@@ -4,7 +4,7 @@ var fftdit4 = require('../../lib/math/fftdit4');
 
 var utils = require('../../lib/utils/arrayutils');
 
-var n = 512*512;
+var n = 512;
 var start;
 var diff;
 

@@ -20,8 +20,8 @@ var padder1 = new ImagePadder({image: model1, type: Image});
 var padder2 = new ImagePadder({image: model2, type: Image});
 
 
-var iimg1 = new Image({ width: padder1.paddedImage.width, height: padder1.paddedImage.height, dataType: Float32Array});
-var iimg2 = new Image({ width: padder1.paddedImage.width, height: padder1.paddedImage.height, dataType: Float32Array});
+var iimg1 = new Image({ width: padder1.paddedImage.width, height: padder1.paddedImage.height, dataType: Float64Array});
+var iimg2 = new Image({ width: padder1.paddedImage.width, height: padder1.paddedImage.height, dataType: Float64Array});
 
 var rowMan1 = new RowManipulator(padder1.paddedImage);
 var columnMan1 = new ColumnManipulator(padder1.paddedImage);
@@ -55,8 +55,6 @@ var columns2 = padder2.paddedImage.height;
 var plength2 = rows2*columns2;
 var length1 = model2.width*model2.height;
 
-
-
 var r1 = padder1.paddedImage.data;
 var r2 = padder2.paddedImage.data;
 var i1 = iimg1.data;
@@ -70,11 +68,13 @@ var diff;
 
 model2.build();
 padder2.load();
+
 var i = plength1;
 while(i--)
 {
 iimg2.data[i] = 0;
 }
+
 var r = rows2;
 while(r--)
 {
@@ -94,6 +94,10 @@ while(c--)
   columnMan2.save(c)
   icolumnMan2.save(c)
 }
+
+
+//START TESTS
+//
 // CALCULATE MODEL
 start = (new Date).getTime();
 
@@ -1023,7 +1027,7 @@ console.log("Time to Normalize Model: " + diff);
       Model.__super__.constructor.call(this, {
         width: this.width,
         height: this.height,
-        dataType: Float32Array
+        dataType: Float64Array
       });
       this.enabled = true;
       this.stale = true;
