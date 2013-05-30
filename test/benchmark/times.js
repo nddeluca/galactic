@@ -9,120 +9,219 @@ var ColumnManipulator = require('../../lib/column_manipulator');
 var Sersic = require('../../lib/sersic');
 
 
-n = 512
-var model = new Sersic("Test",400,400)
-ldn = Math.log(n)/Math.LN2
+n = 512;
+ldn = Math.log(n)/Math.LN2;
 
+var model1 = new Sersic("Test",400,400);
+var model2 = new Sersic("Test",400,400);
 
 // Initialize variables and utilities
-var padder = new ImagePadder({image: model, type: Image});
-var iimg = new Image({ width: padder.paddedImage.width, height: padder.paddedImage.height, dataType: Float64Array});
-
-var rowMan = new RowManipulator(padder.paddedImage);
-var columnMan = new ColumnManipulator(padder.paddedImage);
-
-var irowMan = new RowManipulator(iimg);
-var icolumnMan = new ColumnManipulator(iimg);
-
-var row = rowMan.row;
-var irow = irowMan.row;
-var column = columnMan.column;
-var icolumn = icolumnMan.column;
+var padder1 = new ImagePadder({image: model1, type: Image});
+var padder2 = new ImagePadder({image: model2, type: Image});
 
 
+var iimg1 = new Image({ width: padder1.paddedImage.width, height: padder1.paddedImage.height, dataType: Float32Array});
+var iimg2 = new Image({ width: padder1.paddedImage.width, height: padder1.paddedImage.height, dataType: Float32Array});
+
+var rowMan1 = new RowManipulator(padder1.paddedImage);
+var columnMan1 = new ColumnManipulator(padder1.paddedImage);
+var irowMan1 = new RowManipulator(iimg1);
+var icolumnMan1 = new ColumnManipulator(iimg1);
+
+var row1 = rowMan1.row;
+var irow1 = irowMan1.row;
+var column1 = columnMan1.column;
+var icolumn1 = icolumnMan1.column;
+
+
+var rowMan2 = new RowManipulator(padder2.paddedImage);
+var columnMan2 = new ColumnManipulator(padder2.paddedImage);
+var irowMan2 = new RowManipulator(iimg2);
+var icolumnMan2 = new ColumnManipulator(iimg2);
+
+var row2 = rowMan2.row;
+var irow2 = irowMan2.row;
+var column2 = columnMan2.column;
+var icolumn2 = icolumnMan2.column;
 var norm = 1/(n*n);
 
-var rows = padder.paddedImage.width;
-var columns = padder.paddedImage.height;
-var plength = rows*columns;
-var length = model.width*model.height;
+var rows1 = padder1.paddedImage.width;
+var columns1 = padder1.paddedImage.height;
+var plength1 = rows1*columns1;
+var length1 = model1.width*model1.height;
 
-var num = 100;
-var iterations = num;
+var rows2 = padder2.paddedImage.width;
+var columns2 = padder2.paddedImage.height;
+var plength2 = rows2*columns2;
+var length1 = model2.width*model2.height;
 
-var start = (new Date).getTime()
 
-while(iterations--)
-{
 
-// CALCULATE MODEL
-model.build();
+var r1 = padder1.paddedImage.data;
+var r2 = padder2.paddedImage.data;
+var i1 = iimg1.data;
+var i2 = iimg2.data;
 
-// LOAD MODEL INTO PADDED IMAGE
-padder.load();
 
-// CLEAR IMANIARY INPUT IMAGE
-var i = plength
+var start;
+var diff;
+
+//PRE-COMPUTE MODEL 2 TO SIMULATE PSF
+
+model2.build();
+padder2.load();
+var i = plength1;
 while(i--)
 {
-  iimg.data[i] = 0;
+iimg2.data[i] = 0;
 }
+var r = rows2;
+while(r--)
+{
+  rowMan2.load(r);
+  irowMan2.load(r);
+  fft_dif4_core(row2,irow2,ldn);
+  rowMan2.save(r);
+  irowMan2.save(r);
+}
+
+var c = columns2;
+while(c--)
+{
+  columnMan2.load(c)
+  icolumnMan2.load(c)
+  fft_dif4_core(column2,icolumn2,ldn);
+  columnMan2.save(c)
+  icolumnMan2.save(c)
+}
+// CALCULATE MODEL
+start = (new Date).getTime();
+
+model1.build();
+
+diff = (new Date).getTime() - start;
+console.log("Time to Build Model: " + diff);
+
+// LOAD MODEL INTO PADDED IMAGE
+start = (new Date).getTime();
+
+padder1.load();
+
+diff = (new Date).getTime() - start;
+console.log("Time to Pad the Image: " + diff);
+
+// CLEAR IMANIARY INPUT IMAGE
+start = (new Date).getTime();
+
+var i = plength1;
+while(i--)
+{
+  iimg1.data[i] = 0;
+}
+
+diff = (new Date).getTime() - start;
+console.log("Time to Zero the Imaginary Components: " + diff);
 
 // FORWARD TRANSFROM
-var r = rows;
+start = (new Date).getTime();
+
+r = rows1;
 while(r--)
 {
-  rowMan.load(r);
-  irowMan.load(r);
-  fft_dif4_core(row,irow,ldn)
-  rowMan.save(r);
-  irowMan.save(r);
+  rowMan1.load(r);
+  irowMan1.load(r);
+  fft_dif4_core(row1,irow1,ldn);
+  rowMan1.save(r);
+  irowMan1.save(r);
 }
 
-var c = columns;
+c = columns1;
 while(c--)
 {
-  columnMan.load(c)
-  icolumnMan.load(c)
-  fft_dif4_core(column,icolumn,ldn)
-  columnMan.save(c)
-  icolumnMan.save(c)
+  columnMan1.load(c)
+  icolumnMan1.load(c)
+  fft_dif4_core(column1,icolumn1,ldn);
+  columnMan1.save(c)
+  icolumnMan1.save(c)
 }
 
 
-// INVERSE TRANSFORM
-var r = rows;
-while(r--)
-{
-  rowMan.load(r);
-  irowMan.load(r);
-  fft_dit4_core(irow,row,ldn)
-  rowMan.save(r);
-  irowMan.save(r);
-}
+diff = (new Date).getTime() - start;
+console.log("Time for FFT: " + diff);
 
-var c = columns;
-while(c--)
-{
-  columnMan.load(c)
-  icolumnMan.load(c)
-  fft_dit4_core(icolumn,column,ldn)
-  columnMan.save(c)
-  icolumnMan.save(c)
-}
+// MULTIPLY FOR CONVOLUTION
+start = (new Date).getTime();
 
-// SAVE THE DATA BACK TO MODEL
-padder.save()
-
-// NORMALIZE THE DATA
-var l = length;
+var l = plength1;
+var a,b,c,d;
 while(l--)
 {
-model.data[l] = model.data[l] * norm;
+  a = r1[l];
+  b = i1[l];
+  c = r2[l];
+  d = i2[l];
+
+  r1[l] = a*c - b*d;
+  i1[l] = a*d + b*c;
 }
 
+diff = (new Date).getTime() - start;
+console.log("Time to Multiply Transforms: " + diff);
 
+// INVERSE TRANSFORM
+start = (new Date).getTime();
 
-
+r = rows1;
+while(r--)
+{
+  rowMan1.load(r);
+  irowMan1.load(r);
+  fft_dit4_core(irow1,row1,ldn);
+  rowMan1.save(r);
+  irowMan1.save(r);
 }
 
-var diff = (new Date).getTime() - start
+c = columns1;
+while(c--)
+{
+  columnMan1.load(c)
+  icolumnMan1.load(c)
+  fft_dit4_core(icolumn1,column1,ldn);
+  columnMan1.save(c)
+  icolumnMan1.save(c)
+}
 
-time = diff/num;
+diff = (new Date).getTime() - start;
+console.log("Time for Inverse FFT of Multiplication: " + diff);
 
-console.log("Average Time: " + time);
+// SAVE THE DATA BACK TO MODEL
+start = (new Date).getTime();
 
-},{"../../lib/math/fftdif4":2,"../../lib/math/fftdit4":3,"../../lib/image":4,"../../lib/image_padder":5,"../../lib/column_manipulator":6,"../../lib/row_manipulator":7,"../../lib/sersic":8}],4:[function(require,module,exports){
+padder1.save();
+
+diff = (new Date).getTime() - start;
+console.log("Time to Save Data back to Model: " + diff);
+
+// NORMALIZE THE DATA
+start = (new Date).getTime();
+
+var l = length1;
+while(l--)
+{
+model1.data[l] *= norm;
+}
+
+diff = (new Date).getTime() - start;
+console.log("Time to Normalize Model: " + diff);
+
+
+
+
+
+
+
+
+},{"../../lib/math/fftdif4":2,"../../lib/math/fftdit4":3,"../../lib/image":4,"../../lib/image_padder":5,"../../lib/row_manipulator":6,"../../lib/column_manipulator":7,"../../lib/sersic":8}],4:[function(require,module,exports){
 // Generated by CoffeeScript 1.4.0
 (function() {
   var Image;
@@ -171,7 +270,7 @@ console.log("Average Time: " + time);
 
 }).call(this);
 
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 // Generated by CoffeeScript 1.4.0
 (function() {
   var RowManipulator;
@@ -220,7 +319,7 @@ console.log("Average Time: " + time);
 
 }).call(this);
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 // Generated by CoffeeScript 1.4.0
 (function() {
   var ColumnManipulator;
@@ -292,7 +391,6 @@ console.log("Average Time: " + time);
         height: paddedHeight,
         dataType: this.image.dataType
       });
-      this.load();
     }
 
     ImagePadder.prototype.default_max_width = function() {
@@ -304,7 +402,7 @@ console.log("Average Time: " + time);
     };
 
     ImagePadder.prototype.load = function() {
-      var data, height, offset, offset1, offset2, paddedData, paddedHeight, paddedWidth, width, x, y, _results;
+      var data, height, offset, offset1, offset2, paddedData, paddedHeight, paddedWidth, width, x, y;
       data = this.image.data;
       width = this.image.width;
       height = this.image.height;
@@ -322,21 +420,15 @@ console.log("Average Time: " + time);
         y--;
       }
       y = height;
-      _results = [];
       while (y--) {
         offset1 = y * width;
         offset2 = y * paddedWidth;
         x = width;
-        _results.push((function() {
-          var _results1;
-          _results1 = [];
-          while (x--) {
-            _results1.push(paddedData[x + offset2] = data[x + offset1]);
-          }
-          return _results1;
-        })());
+        while (x--) {
+          paddedData[x + offset2] = data[x + offset1];
+        }
       }
-      return _results;
+      return void 0;
     };
 
     ImagePadder.prototype.save = function() {
@@ -369,7 +461,94 @@ console.log("Average Time: " + time);
 
 }).call(this);
 
-},{"./utils/closest_power_of_two":9}],2:[function(require,module,exports){
+},{"./utils/closest_power_of_two":9}],8:[function(require,module,exports){
+// Generated by CoffeeScript 1.4.0
+(function() {
+  var Model, Sersic,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  Model = require('./model');
+
+  Sersic = (function(_super) {
+
+    __extends(Sersic, _super);
+
+    function Sersic(name, width, height) {
+      this.name = name;
+      this.width = width;
+      this.height = height;
+      Sersic.__super__.constructor.call(this, this.name, this.width, this.height);
+      this.initDefaultParams();
+      this.initParamArray();
+    }
+
+    Sersic.prototype.initParamArray = function() {
+      return this.paramArray = ['centerX', 'centerY', 'angle', 'axisRatio', 'effRadius', 'intensity', 'n'];
+    };
+
+    Sersic.prototype.toJSON = function() {
+      return JSON.stringify(this.params);
+    };
+
+    Sersic.prototype.initDefaultParams = function() {
+      return this.params = {
+        centerX: 31.5,
+        centerY: 42,
+        angle: 0,
+        axisRatio: 1,
+        effRadius: 6,
+        intensity: 2.3,
+        n: 1
+      };
+    };
+
+    Sersic.prototype.build = function() {
+      var angle, cos, cx, cy, data, exponent, height, intensity, invAxisRatio, invEffRadius, invN, n, norm, r, r_x, r_y, sin, width, x, y;
+      Sersic.__super__.build.apply(this, arguments);
+      data = this.data;
+      n = this.params.n;
+      invN = 1 / n;
+      cx = this.params.centerX;
+      cy = this.params.centerY;
+      angle = this.params.angle;
+      invAxisRatio = 1 / this.params.axisRatio;
+      invEffRadius = 1 / this.params.effRadius;
+      intensity = this.params.intensity;
+      if (n === 4) {
+        norm = 7.669;
+      } else {
+        norm = n * Math.exp(0.6950 - 0.1789 * invN);
+      }
+      sin = Math.sin(angle);
+      cos = Math.cos(angle);
+      width = this.width;
+      height = this.height;
+      x = width;
+      while (x--) {
+        y = height;
+        while (y--) {
+          r_x = (x - cx) * cos + (y - cy) * sin;
+          r_y = ((y - cy) * cos - (x - cx) * sin) * invAxisRatio;
+          r = Math.sqrt(r_x * r_x + r_y * r_y);
+          exponent = norm * (Math.pow(r * invEffRadius, invN) - 1);
+          data[y * width + x] = intensity * Math.exp(-exponent);
+        }
+      }
+      return void 0;
+    };
+
+    return Sersic;
+
+  })(Model);
+
+  if (typeof module !== "undefined" && module !== null) {
+    module.exports = Sersic;
+  }
+
+}).call(this);
+
+},{"./model":10}],2:[function(require,module,exports){
 // Generated by CoffeeScript 1.4.0
 (function() {
   var fft8_dif_core, fft_dif4_core;
@@ -503,94 +682,7 @@ console.log("Average Time: " + time);
 
 }).call(this);
 
-},{"./fft8dif":10}],8:[function(require,module,exports){
-// Generated by CoffeeScript 1.4.0
-(function() {
-  var Model, Sersic,
-    __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
-  Model = require('./model');
-
-  Sersic = (function(_super) {
-
-    __extends(Sersic, _super);
-
-    function Sersic(name, width, height) {
-      this.name = name;
-      this.width = width;
-      this.height = height;
-      Sersic.__super__.constructor.call(this, this.name, this.width, this.height);
-      this.initDefaultParams();
-      this.initParamArray();
-    }
-
-    Sersic.prototype.initParamArray = function() {
-      return this.paramArray = ['centerX', 'centerY', 'angle', 'axisRatio', 'effRadius', 'intensity', 'n'];
-    };
-
-    Sersic.prototype.toJSON = function() {
-      return JSON.stringify(this.params);
-    };
-
-    Sersic.prototype.initDefaultParams = function() {
-      return this.params = {
-        centerX: 31.5,
-        centerY: 42,
-        angle: 0,
-        axisRatio: 1,
-        effRadius: 6,
-        intensity: 2.3,
-        n: 1
-      };
-    };
-
-    Sersic.prototype.build = function() {
-      var angle, cos, cx, cy, data, exponent, height, intensity, invAxisRatio, invEffRadius, invN, n, norm, r, r_x, r_y, sin, width, x, y;
-      Sersic.__super__.build.apply(this, arguments);
-      data = this.data;
-      n = this.params.n;
-      invN = 1 / n;
-      cx = this.params.centerX;
-      cy = this.params.centerY;
-      angle = this.params.angle;
-      invAxisRatio = 1 / this.params.axisRatio;
-      invEffRadius = 1 / this.params.effRadius;
-      intensity = this.params.intensity;
-      if (n === 4) {
-        norm = 7.669;
-      } else {
-        norm = n * Math.exp(0.6950 - 0.1789 * invN);
-      }
-      sin = Math.sin(angle);
-      cos = Math.cos(angle);
-      width = this.width;
-      height = this.height;
-      x = width;
-      while (x--) {
-        y = height;
-        while (y--) {
-          r_x = (x - cx) * cos + (y - cy) * sin;
-          r_y = ((y - cy) * cos - (x - cx) * sin) * invAxisRatio;
-          r = Math.sqrt(r_x * r_x + r_y * r_y);
-          exponent = norm * (Math.pow(r * invEffRadius, invN) - 1);
-          data[y * width + x] = intensity * Math.exp(-exponent);
-        }
-      }
-      return void 0;
-    };
-
-    return Sersic;
-
-  })(Model);
-
-  if (typeof module !== "undefined" && module !== null) {
-    module.exports = Sersic;
-  }
-
-}).call(this);
-
-},{"./model":11}],3:[function(require,module,exports){
+},{"./fft8dif":11}],3:[function(require,module,exports){
 // Generated by CoffeeScript 1.4.0
 (function() {
   var fft8_dit_core, fft_dit4_core;
@@ -725,7 +817,31 @@ console.log("Average Time: " + time);
 
 }).call(this);
 
-},{"./fft8dit":12}],10:[function(require,module,exports){
+},{"./fft8dit":12}],9:[function(require,module,exports){
+// Generated by CoffeeScript 1.4.0
+(function() {
+  var closest_power_of_two;
+
+  closest_power_of_two = function(value, max) {
+    var powerOfTwo;
+    if (value < max) {
+      powerOfTwo = 1;
+      while (powerOfTwo < value && powerOfTwo < max) {
+        powerOfTwo = powerOfTwo << 1;
+      }
+      return powerOfTwo;
+    } else {
+      return max;
+    }
+  };
+
+  if (typeof module !== "undefined" && module !== null) {
+    module.exports = closest_power_of_two;
+  }
+
+}).call(this);
+
+},{}],11:[function(require,module,exports){
 // Generated by CoffeeScript 1.4.0
 (function() {
   var fft8_dif_core;
@@ -796,35 +912,12 @@ console.log("Average Time: " + time);
     fi[i1] = m1i;
     fi[i6] = t2r + t4r;
     fi[i2] = m2i - t6r;
-    return fi[i4] = t1r - t3r;
+    fi[i4] = t1r - t3r;
+    return void 0;
   };
 
   if (typeof module !== "undefined" && module !== null) {
     module.exports = fft8_dif_core;
-  }
-
-}).call(this);
-
-},{}],9:[function(require,module,exports){
-// Generated by CoffeeScript 1.4.0
-(function() {
-  var closest_power_of_two;
-
-  closest_power_of_two = function(value, max) {
-    var powerOfTwo;
-    if (value < max) {
-      powerOfTwo = 1;
-      while (powerOfTwo < value && powerOfTwo < max) {
-        powerOfTwo = powerOfTwo << 1;
-      }
-      return powerOfTwo;
-    } else {
-      return max;
-    }
-  };
-
-  if (typeof module !== "undefined" && module !== null) {
-    module.exports = closest_power_of_two;
   }
 
 }).call(this);
@@ -900,7 +993,8 @@ console.log("Average Time: " + time);
     fi[i4] = m1i;
     fi[i3] = t2r + t4r;
     fi[i2] = m2i - t6r;
-    return fi[i1] = t1r - t3r;
+    fi[i1] = t1r - t3r;
+    return void 0;
   };
 
   if (typeof module !== "undefined" && module !== null) {
@@ -909,7 +1003,7 @@ console.log("Average Time: " + time);
 
 }).call(this);
 
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 // Generated by CoffeeScript 1.4.0
 (function() {
   var Image, Model,
@@ -928,7 +1022,8 @@ console.log("Average Time: " + time);
       this.height = height;
       Model.__super__.constructor.call(this, {
         width: this.width,
-        height: this.height
+        height: this.height,
+        dataType: Float32Array
       });
       this.enabled = true;
       this.stale = true;

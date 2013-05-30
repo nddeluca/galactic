@@ -84,4 +84,6 @@ fft8_dif_core = (fr,fi,offset) ->
   fi[i2] = m2i - t6r
   fi[i4] = t1r - t3r
 
+  undefined
+
 module?.exports = fft8_dif_core

@@ -1,4 +1,4 @@
-closest_power_of_two = require('../../src/utils/closest_power_of_two')
+closest_power_of_two = require('../../../src/utils/closest_power_of_two')
 
 describe "Closest Power of Two", ->
 

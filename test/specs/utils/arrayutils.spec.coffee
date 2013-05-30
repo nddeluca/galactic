@@ -1,4 +1,4 @@
-utils = require('../../src/utils/arrayutils')
+utils = require('../../../src/utils/arrayutils')
 
 describe 'utils', ->
 

@@ -4,7 +4,7 @@ var fftdit4 = require('../../lib/math/fftdit4');
 
 var utils = require('../../lib/utils/arrayutils');
 
-var n = 16;
+var n = 512*512;
 var start;
 var diff;
 
@@ -16,7 +16,6 @@ var diff;
 var buffer = new ArrayBuffer(8*2*n);
 var x = new Float64Array(buffer)
 var l = 2*Math.PI;
-x = [];
 for( var i=0; i < n;i++){
   x[i] = Math.sin(i*(l/(n-1)));
 
@@ -37,8 +36,6 @@ console.log("Real Split-radix FFT Time: " + diff)
 //-------------------------------
 x = new Float64Array(buffer, 0,n);
 y = new Float64Array(buffer,8*n);
-x = []
-y = []
 
 for( var i=0; i < n;i++){
   x[i] = Math.sin(i*(l/(n-1)));
@@ -98,50 +95,50 @@ console.log("Core DIT Radix-4 Time: " + diff);
 
 //--------------------------
 
-n = 8;
-x = []
-y = []
+//n = 8;
+//x = []
+//y = []
 
-for( var i=0; i < n;i++){
-  x[i] = Math.sin(i*(l/(n-1)));
-}
+//for( var i=0; i < n;i++){
+  //x[i] = Math.sin(i*(l/(n-1)));
+//}
 
-for(var i=0; i < n;i++){
-  y[i]=0;
-}
+//for(var i=0; i < n;i++){
+  //y[i]=0;
+//}
 
-console.log("**********Original Values**********")
-console.log(x);
-console.log(y);
+//console.log("**********Original Values**********")
+//console.log(x);
+//console.log(y);
 
-var ldn = Math.log(n)/Math.LN2
+//var ldn = Math.log(n)/Math.LN2
 
 //fftdif4(x,y,ldn);
 
-utils.revbin_permute(x,n)
-utils.revbin_permute(y,n)
+//utils.revbin_permute(x,n)
+//utils.revbin_permute(y,n)
 
-fftdit4(x,y,ldn)
+//fftdit4(x,y,ldn)
 
-console.log("***********Values After Transform**********")
+//console.log("***********Values After Transform**********")
 
-console.log(x)
-console.log(y)
+//console.log(x)
+//console.log(y)
 
 //fftdif4(y,x,ldn);
 
-utils.revbin_permute(x,n)
-utils.revbin_permute(y,n)
+//utils.revbin_permute(x,n)
+//utils.revbin_permute(y,n)
 
-fftdit4(y,x,ldn);
+//fftdit4(y,x,ldn);
 
-for(var i=0; i <n;i++){
- x[i] = (1/n)*x[i]
- y[i] = (1/n)*y[i]
+//for(var i=0; i <n;i++){
+ //x[i] = (1/n)*x[i]
+ //y[i] = (1/n)*y[i]
 
-}
-console.log("**********Values after FFT and Inverse**********")
-console.log(x)
-console.log(y)
+//}
+//console.log("**********Values after FFT and Inverse**********")
+//console.log(x)
+//console.log(y)
 
 

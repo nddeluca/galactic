@@ -11,7 +11,6 @@ class ImagePadder
     paddedHeight = closest_power_of_two(@image.height,@maxHeight)
 
     @paddedImage = new @paddedClass({width: paddedWidth, height: paddedHeight, dataType: @image.dataType })
-    @load()
 
   default_max_width: ->
     512
@@ -43,6 +42,8 @@ class ImagePadder
       x = width
       while x--
         paddedData[x + offset2] = data[x + offset1]
+
+    undefined
 
   save: ->
     data = @image.data

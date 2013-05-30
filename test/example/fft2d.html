@@ -1,0 +1,42 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <canvas id="original" width="512" height="512"></canvas>
+    <div id="fft-container"></div>
+    
+    <script>
+      function drawImage(imageObj) {
+        var canvas = document.getElementById('original');
+        var context = canvas.getContext('2d');
+        var imageX = 0;
+        var imageY = 0;
+        var imageWidth = imageObj.width;
+        var imageHeight = imageObj.height;
+
+        context.drawImage(imageObj, imageX, imageY);
+
+        var imageData = context.getImageData(imageX, imageY, imageWidth, imageHeight);
+        var data = imageData.data;
+
+}
+
+
+
+      function perform_fft() {
+
+
+
+      }
+
+      var imageObj = new Image();
+      imageObj.onload = function() {
+       data =  drawImage(this);
+      };
+
+      imageObj.src = "file:///home/nick/WORK/zooniverse/galactic/test/example/data/skyline.jpg";
+
+
+    </script>
+    </body>
+</html>
