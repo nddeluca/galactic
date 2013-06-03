@@ -67,7 +67,7 @@ class Sersic extends Model
     while y--
       offset = y*width
       ydiff = y - cy
-      x = height
+      x = width
       while x--
         xdiff = x - cx
         r_x = xdiff*cos + ydiff*sin
