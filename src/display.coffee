@@ -23,7 +23,7 @@ class Display extends Canvas
   #The image object must have width, height, and a data attribute.
   #See image.coffee for an example of an image class.
   constructor: (container,desiredWidth,image) ->
-    @image = new Image(image.width,image.height)
+    @image = new Image({width: image.width, height: image.height})
     @image.data = image.data
     @min = utils.min(image.data)
     @max = utils.max(image.data)
