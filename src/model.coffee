@@ -8,7 +8,7 @@ class Model extends Image
   #set the model to be enabled and stale by default, and
   #initilizes the params and paramArray for use by child classes.
   constructor: (@name,@width,@height) ->
-    super({width: @width, height: @height, dataType: Float64Array})
+    super({width: @width, height: @height, dataType: Float32Array})
     @enabled = true
     @stale = true
     @params = {}
@@ -21,7 +21,7 @@ class Model extends Image
   #Disables the model.
   disable: ->
     @enabled = false
-	
+
   #Update the entire params object at once,
   #and marks the model as stale.
   updateParams: (params) ->
