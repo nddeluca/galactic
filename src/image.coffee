@@ -15,7 +15,7 @@ class Image
     @data = new @dataType(@buffer)
 
   default_data_type: ->
-    Float32Array
+    Float64Array
 
   default_width: ->
     512

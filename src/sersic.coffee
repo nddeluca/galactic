@@ -48,18 +48,35 @@ class Sersic extends Model
 
     sin = Math.sin(angle)
     cos = Math.cos(angle)
+    sin_ratio = sin*invAxisRatio
+    cos_ratio = cos*invAxisRatio
 
     width = @width
     height = @height
-    x = width
-    while x--
-      y = height
-      while y--
-        r_x = (x-cx)*cos+(y-cy)*sin
-        r_y = ((y-cy)*cos-(x-cx)*sin)*invAxisRatio
+    #x = width
+    #while x--
+    #y = height
+    #while y--
+    #r_x = (x-cx)*cos+(y-cy)*sin
+    #r_y = ((y-cy)*cos-(x-cx)*sin)*invAxisRatio
+    #r = Math.sqrt(r_x*r_x + r_y*r_y)
+    #exponent = norm*(Math.pow(r*invEffRadius,invN) - 1)
+    #data[y*width+x] = intensity*Math.exp(-exponent)
+
+    y = height
+    while y--
+      offset = y*width
+      ydiff = y - cy
+      x = height
+      while x--
+        xdiff = x - cx
+        r_x = xdiff*cos + ydiff*sin
+        r_y = ydiff*cos_ratio - xdiff*sin_ratio
         r = Math.sqrt(r_x*r_x + r_y*r_y)
         exponent = norm*(Math.pow(r*invEffRadius,invN) - 1)
-        data[y*width+x] = intensity*Math.exp(-exponent)
+        data[offset+x] = intensity*Math.exp(-exponent)
+
+
     undefined
 
 module?.exports = Sersic
