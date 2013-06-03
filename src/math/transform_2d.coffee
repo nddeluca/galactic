@@ -35,13 +35,6 @@ class Transform2d
 
     default_permute: ->
       true
-      `
-
-
-
-
-
-
 
 
 
