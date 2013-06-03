@@ -4,25 +4,31 @@ Image = require('../../src/image')
 
 describe 'Image', ->
   image = null
-  width = 100
-  height = 100
 
   beforeEach ->
     image = new Image()
 
-  describe 'instance variables', ->
 
-    it 'should have a width', ->
-      expect(image.width).toBeDefined()
+  describe 'width', ->
 
-    it 'should have a height', ->
-      expect(image.height).toBeDefined()
+    it 'should be set to the default when it is not provided', ->
+      image = new Image()
+      expect(image.width).toEqual image.default_width()
 
-    it 'should have a buffer', ->
-      expect(image.buffer).toBeDefined()
+    it 'should be set to the correct value when provided', ->
+      image = new Image({width: 123})
+      expect(image.width).toEqual 123
 
-    it 'should have a data array', ->
-      expect(image.data).toBeDefined()
+  describe 'height', ->
+
+    it 'should be set to the default when it is not provided', ->
+      image = new Image()
+      expect(image.height).toEqual image.default_height()
+
+    it 'should be set to the correct value when provided', ->
+      image = new Image({height: 321})
+      expect(image.height).toEqual 321
+
 
 
     describe 'buffer', ->
