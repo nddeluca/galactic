@@ -11,7 +11,7 @@ class Modeler
     @fitsData = @fitsImage.data
     @width = @fitsImage.width
     @height = @fitsImage.height
-    @image = new Image(@width,@height)
+    @image = new Image({width: @width, height: @height})
     @residual = new Residual(@width,@height)
     @models = []
     @undo = []
