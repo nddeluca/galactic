@@ -2,42 +2,34 @@ Model = require('./model')
 
 class Sersic extends Model
 
-  set_up_parameters: ->
-    @params =
-      centerX: 31.5
-      centerY: 42
-      angle: 0
-      axisRatio: 1
-      effRadius: 6
-      intensity: 2.3
-      n: 1
+  set_up_parameters: (args) ->
+    @centerX = if args.centerX? then args.centerX else @width/2
+    @centerY = if args.centerY? then args.centerY else @height/2
+    @angle = if args.angle? then args.angle else 0
+    @axisRatio = if args.axisRatio? then args.axisRatio else 1
+    @effRadius = if args.effRadius? then args.effRadius else ((@centerX + @centerY)/4)
+    @intensity = if args.intensity then args.intensity else 10
+    @n = if args.n? then args.n else 4
 
-  on_params_update: (params) ->
-    @params = params
-
-
-  #initParamArray: ->
-    #@paramArray = ['centerX',
-    #'centerY',
-    #'angle',
-    #'axisRatio',
-    #'effRadius',
-    #'intensity',
-    #'n']
-
-  #toJSON: ->
-    #JSON.stringify(@params)
+  on_params_update: (args) ->
+    if args.centerX? then @centerX = args.centerX
+    if args.centerY? then @centerY = args.centerY
+    if args.angle? then @angle = args.angle
+    if args.axisRatio? then @axisRatio = args.axisRatio
+    if args.effRadius? then @effRadius = args.effRadius
+    if args.intensity? then @intensity = args.intensity
+    if args.n? then @n = args.n
 
   calculate: ->
     data = @data
-    n = @params.n
+    n = @n
     invN = 1/n
-    cx = @params.centerX
-    cy = @params.centerY
-    angle = @params.angle
-    invAxisRatio = 1/@params.axisRatio
-    invEffRadius = 1/@params.effRadius
-    intensity = @params.intensity
+    cx = @centerX
+    cy = @centerY
+    angle = @angle
+    invAxisRatio = 1/@axisRatio
+    invEffRadius = 1/@effRadius
+    intensity = @intensity
 
     if n == 4
       norm = 7.669
