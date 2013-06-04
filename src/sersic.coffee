@@ -1,24 +1,8 @@
 Model = require('./model')
 
 class Sersic extends Model
-  constructor: (@name,@width,@height) ->
-    super(@name,@width,@height)
-    @initDefaultParams()
-    @initParamArray()
 
-  initParamArray: ->
-    @paramArray = ['centerX',
-     'centerY',
-     'angle',
-     'axisRatio',
-     'effRadius',
-     'intensity',
-     'n']
-
-  toJSON: ->
-    JSON.stringify(@params)
-
-  initDefaultParams: ->
+  set_up_parameters: ->
     @params =
       centerX: 31.5
       centerY: 42
@@ -27,10 +11,24 @@ class Sersic extends Model
       effRadius: 6
       intensity: 2.3
       n: 1
-    
-  build: ->
-    super
 
+  on_params_update: (params) ->
+    @params = params
+
+
+  #initParamArray: ->
+    #@paramArray = ['centerX',
+    #'centerY',
+    #'angle',
+    #'axisRatio',
+    #'effRadius',
+    #'intensity',
+    #'n']
+
+  #toJSON: ->
+    #JSON.stringify(@params)
+
+  calculate: ->
     data = @data
     n = @params.n
     invN = 1/n
@@ -53,15 +51,6 @@ class Sersic extends Model
 
     width = @width
     height = @height
-    #x = width
-    #while x--
-    #y = height
-    #while y--
-    #r_x = (x-cx)*cos+(y-cy)*sin
-    #r_y = ((y-cy)*cos-(x-cx)*sin)*invAxisRatio
-    #r = Math.sqrt(r_x*r_x + r_y*r_y)
-    #exponent = norm*(Math.pow(r*invEffRadius,invN) - 1)
-    #data[y*width+x] = intensity*Math.exp(-exponent)
 
     y = height
     while y--
@@ -75,7 +64,6 @@ class Sersic extends Model
         r = Math.sqrt(r_x*r_x + r_y*r_y)
         exponent = norm*(Math.pow(r*invEffRadius,invN) - 1)
         data[offset+x] = intensity*Math.exp(-exponent)
-
 
     undefined
 

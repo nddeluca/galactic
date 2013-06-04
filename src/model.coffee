@@ -1,37 +1,35 @@
-#The model class is the base class for all galaxy models.
-#It provides basic functions required for use with the modeler class
-#to provide an enabled attribute and state tracking.
 Image = require('./image')
 
 class Model extends Image
-  #Passes the width and height to the image constructor,
-  #set the model to be enabled and stale by default, and
-  #initilizes the params and paramArray for use by child classes.
-  constructor: (@name,@width,@height) ->
-    super(width: @width, height: @height)
-    @enabled = true
-    @stale = true
-    @params = {}
-    @paramArray = []
 
+  post_initialize: (args) ->
+    @name = args.name
+    @enabled = unless args.enabled? then true else args.enabled
+    @stale = unless args.stale? then true else args.stale
+    @set_up_parameters(args)
 
-  #Enables the model.
+  set_up_parameters: (args) ->
+    null
+
   enable: ->
     @enabled = true
-  #Disables the model.
+
   disable: ->
     @enabled = false
 
-  #Update the entire params object at once,
-  #and marks the model as stale.
-  updateParams: (params) ->
-    @params = params
+  update_params: (args) ->
     @stale = true
+    @on_params_update(args)
 
-  #Provides a super call for child classes
-  #that will automatically mark the stale attribute to
-  #false.
+  on_params_update: (args) ->
+    null
+
   build: ->
     @stale = false
+    @calculate()
+
+  calculate: ->
+    null
+
 
 module?.exports = Model

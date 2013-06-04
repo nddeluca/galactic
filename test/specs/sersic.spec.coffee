@@ -1,8 +1,9 @@
 examplesForImageInterface = require('../shared/image_examples')
 examplesForModelInterface = require('../shared/model_examples')
 
-Model = require('../../src/model')
+Sersic = require('../../src/sersic')
 
 describe 'Model', ->
-  examplesForImageInterface(Model)
-  examplesForModelInterface(Model)
+  examplesForImageInterface(Sersic)
+  examplesForModelInterface(Sersic)
+
