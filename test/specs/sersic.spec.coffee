@@ -13,7 +13,7 @@ describe 'Sersic', ->
   describe 'default parameters', ->
 
     beforeEach ->
-      sersic = new Sersic()
+      sersic = new Sersic(name: "Test")
 
     it "should have a centerX of half the width", ->
       expect(sersic.centerX).toEqual sersic.width/2
@@ -104,6 +104,15 @@ describe 'Sersic', ->
       expect(sersic.n).toEqual n
 
 
+  describe 'data', ->
 
-  
+    beforeEach ->
+      sersic = new Sersic(name: "test", width: 4, height: 4)
+
+
+
+
+
+
+
 

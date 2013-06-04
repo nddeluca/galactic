@@ -22,7 +22,7 @@ describe 'ColumnManipulator', ->
       data[(height-1)+ y*width] = 3
 
     image = {width: width, height: height, dataType: Float64Array, data: data}
-    manipulator = new ColumnManipulator(image)
+    manipulator = new ColumnManipulator(image: image)
 
     resultbuff = new ArrayBuffer(Float64Array.BYTES_PER_ELEMENT*image.height)
     result = new Float64Array(resultbuff)
