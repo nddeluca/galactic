@@ -22,7 +22,7 @@ describe 'RowManipulator', ->
       data[x + (height-1)*width] = 3
 
     image = {width: width, height: height, dataType: Float64Array, data: data}
-    manipulator = new RowManipulator(image)
+    manipulator = new RowManipulator(image: image)
 
     resultbuff = new ArrayBuffer(Float64Array.BYTES_PER_ELEMENT*image.width)
     result = new Float64Array(resultbuff)

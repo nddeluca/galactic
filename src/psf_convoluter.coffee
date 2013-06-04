@@ -47,7 +47,7 @@ class PSFConvolutor
     padder = @psfPadder
     paddedLength = rows*columns
 
-    imImage = @iPsfImage
+    imImage = @iPsfImage.data
 
     rRowM = @rRowPsf
     iRowM = @iRowPsf
@@ -68,10 +68,10 @@ class PSFConvolutor
     r = rows
     while r--
       rRowM.load(r)
-      iRowMan.load(r)
+      iRowM.load(r)
       fft_dif4_core(rRow,iRow,ldnRow)
       rRowM.save(r)
-      iRowMan.save(r)
+      iRowM.save(r)
 
     c = columns
     while c--
@@ -122,10 +122,10 @@ class PSFConvolutor
     r = rows
     while r--
       rRowM.load(r)
-      iRowMan.load(r)
+      iRowM.load(r)
       fft_dif4_core(rRow,iRow,ldnRow)
       rRowM.save(r)
-      iRowMan.save(r)
+      iRowM.save(r)
 
     c = columns
     while c--
@@ -148,10 +148,10 @@ class PSFConvolutor
     r = rows
     while r--
       rRowM.load(r)
-      iRowMan.load(r)
+      iRowM.load(r)
       fft_dit4_core(iRow,rRow,ldnRow)
       rRowM.save(r)
-      iRowMan.save(r)
+      iRowM.save(r)
 
     c = columns
     while c--

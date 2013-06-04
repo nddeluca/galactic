@@ -1,6 +1,7 @@
 class RowManipulator
 
-  constructor: (@image) ->
+  constructor: (args = {}) ->
+    @image = args.image
     @buffer = new ArrayBuffer(@image.dataType.BYTES_PER_ELEMENT*@image.width)
     @row = new @image.dataType(@buffer)
 

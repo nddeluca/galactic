@@ -1,17 +1,20 @@
 Image = require('./image')
 
 class Residual extends Image
-  constructor: (@width,@height) ->
-    super({width: @width,height: @height})
 
+  post_initialize: (args) ->
+    @fitsData = args.fitsData
+    @modelData = args.modelData
 
-  #Finds the difference between the
-  #fits and model data and stores it
-  build: (fitsData,modelData) ->
-    data = @data
+  build: ->
+    residual = @data
+    fits = @fitsData
+    model = @modelData
     i = @width*@height
+
     while i--
-      data[i] = fitsData[i] - modelData[i]
+      fitsData[i] = fits[i] - model[i]
+
     undefined
 
 module?.exports = Residual

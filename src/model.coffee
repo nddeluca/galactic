@@ -8,7 +8,7 @@ class Model extends Image
   #set the model to be enabled and stale by default, and
   #initilizes the params and paramArray for use by child classes.
   constructor: (@name,@width,@height) ->
-    super({width: @width, height: @height})
+    super(width: @width, height: @height)
     @enabled = true
     @stale = true
     @params = {}

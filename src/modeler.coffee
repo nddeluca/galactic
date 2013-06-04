@@ -6,7 +6,6 @@ utils = require('./utils/arrayutils')
 
 class Modeler
 
-  
   constructor: (@fitsImage) ->
     @fitsData = @fitsImage.data
     @width = @fitsImage.width
