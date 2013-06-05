@@ -19,7 +19,7 @@ beforeEach( ->
         error = Math.abs(actual[i] - expected[i])
         if error > tolerance
           @message = ->
-            "Expected element " + i + ", " + expected[i] + " to be within " + tolerance + "of actual element " + i + ", " + actual[i]
+            "Expected element " + i + ", " + expected[i] + " to be within " + tolerance + " of actual element " + i + ", " + actual[i]
           return false
       return true
 

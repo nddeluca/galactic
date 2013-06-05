@@ -37,7 +37,7 @@ ordered_output = zeros(1,width*height);
 
 for x = 1:width
   for y = 1:height
-   ordered_output(x + (y - 1)*width) = output(y,x);  
+   ordered_output(x + (y - 1)*width) = output(y,x);
   end
 end
 
