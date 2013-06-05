@@ -10,5 +10,18 @@ beforeEach( ->
 
     toBeInstanceOf: (expected) ->
       this.actual instanceof expected
+
+
+    toBeCloseByElement: (expected,tolerance) ->
+      actual = @actual
+      i = actual.length
+      while i--
+        error = Math.abs(actual[i] - expected[i])
+        if error > tolerance
+          @message = ->
+            "Expected element " + i + ", " + expected[i] + " to be within " + tolerance + "of actual element " + i + ", " + actual[i]
+          return false
+      return true
+
   )
 )

@@ -3,6 +3,8 @@ examplesForModelInterface = require('../shared/model_examples')
 
 Sersic = require('../../src/sersic')
 
+require('../spec_helper')
+
 describe 'Sersic', ->
   examplesForImageInterface(Sersic)
   examplesForModelInterface(Sersic)
@@ -16,10 +18,10 @@ describe 'Sersic', ->
       sersic = new Sersic(name: "Test")
 
     it "should have a centerX of half the width", ->
-      expect(sersic.centerX).toEqual sersic.width/2
+      expect(sersic.centerX).toEqual (sersic.width/2 - 1)
 
     it "should have a centerY of half the height", ->
-      expect(sersic.centerY).toEqual sersic.height/2
+      expect(sersic.centerY).toEqual (sersic.height/2 - 1)
 
     it 'should have an angle of zero', ->
       expect(sersic.angle).toEqual 0
@@ -39,14 +41,14 @@ describe 'Sersic', ->
   describe 'setting parameters on construction', ->
 
     beforeEach ->
-      params = { centerX: 0, centerY: 0, angle: Math.PI/2, axisRatio: 1.5, effRadius: 1, intensity: 1, n: 1}
+      params = { centerX: 1, centerY: 1, angle: Math.PI/2, axisRatio: 1.5, effRadius: 1, intensity: 1, n: 1}
       sersic = new Sersic(params)
 
-    it 'should have the correct centerX', ->
-      expect(sersic.centerX).toEqual params.centerX
+    it 'should have the correct centerX accounting for zero indexing', ->
+      expect(sersic.centerX).toEqual (params.centerX - 1)
 
-    it 'should have the correct centerY', ->
-      expect(sersic.centerY).toEqual params.centerY
+    it 'should have the correct centerY accounting for zero indexing', ->
+      expect(sersic.centerY).toEqual (params.centerY - 1)
 
     it 'should have the correct angle', ->
       expect(sersic.angle).toEqual params.angle
@@ -105,14 +107,18 @@ describe 'Sersic', ->
 
 
   describe 'data', ->
+    results = null
+    tolerance = null
 
     beforeEach ->
-      sersic = new Sersic(name: "test", width: 4, height: 4)
+      sersic = new Sersic(name: "test", width: 4, height: 4, n: 4, intensity: 1, angle: Math.PI/2, axisRatio: 1.25, effRadius: 2)
+      sersic.build()
 
+      results = require('../data/sersic.data')
 
+      tolerance = 5e-15
 
-
-
-
+    it 'should be within the desired tolerance', ->
+      expect(sersic.data).toBeCloseByElement(results,tolerance)
 
 

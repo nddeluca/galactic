@@ -3,8 +3,8 @@ Model = require('./model')
 class Sersic extends Model
 
   set_up_parameters: (args) ->
-    @centerX = if args.centerX? then args.centerX else @width/2
-    @centerY = if args.centerY? then args.centerY else @height/2
+    @centerX = if args.centerX? then (args.centerX - 1) else (@width/2 - 1)
+    @centerY = if args.centerY? then (args.centerY - 1) else (@height/2 - 1)
     @angle = if args.angle? then args.angle else 0
     @axisRatio = if args.axisRatio? then args.axisRatio else 1
     @effRadius = if args.effRadius? then args.effRadius else ((@centerX + @centerY)/4)
@@ -54,8 +54,8 @@ class Sersic extends Model
         r_x = xdiff*cos + ydiff*sin
         r_y = ydiff*cos_ratio - xdiff*sin_ratio
         r = Math.sqrt(r_x*r_x + r_y*r_y)
-        exponent = norm*(Math.pow(r*invEffRadius,invN) - 1)
-        data[offset+x] = intensity*Math.exp(-exponent)
+        exponent = norm*(1 - Math.pow(r*invEffRadius,invN))
+        data[offset+x] = intensity*Math.exp(exponent)
 
     undefined
 
