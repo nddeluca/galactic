@@ -11,8 +11,8 @@ var Sersic = require('../../lib/sersic');
 n = 512;
 ldn = Math.log(n)/Math.LN2;
 
-var model1 = new Sersic("Test",400,400);
-var model2 = new Sersic("Test",400,400);
+var model1 = new Sersic({name: "Test", width: 400, height: 400});
+var model2 = new Sersic({name: "Test", width: 400, height: 400});
 
 // Initialize variables and utilities
 var padder1 = new ImagePadder({image: model1, type: Image});
@@ -22,10 +22,10 @@ var padder2 = new ImagePadder({image: model2, type: Image});
 var iimg1 = new Image({ width: padder1.paddedImage.width, height: padder1.paddedImage.height, dataType: Float64Array});
 var iimg2 = new Image({ width: padder1.paddedImage.width, height: padder1.paddedImage.height, dataType: Float64Array});
 
-var rowMan1 = new RowManipulator(padder1.paddedImage);
-var columnMan1 = new ColumnManipulator(padder1.paddedImage);
-var irowMan1 = new RowManipulator(iimg1);
-var icolumnMan1 = new ColumnManipulator(iimg1);
+var rowMan1 = new RowManipulator({image: padder1.paddedImage});
+var columnMan1 = new ColumnManipulator({image: padder1.paddedImage});
+var irowMan1 = new RowManipulator({image: iimg1});
+var icolumnMan1 = new ColumnManipulator({image: iimg1});
 
 var row1 = rowMan1.row;
 var irow1 = irowMan1.row;
@@ -33,10 +33,10 @@ var column1 = columnMan1.column;
 var icolumn1 = icolumnMan1.column;
 
 
-var rowMan2 = new RowManipulator(padder2.paddedImage);
-var columnMan2 = new ColumnManipulator(padder2.paddedImage);
-var irowMan2 = new RowManipulator(iimg2);
-var icolumnMan2 = new ColumnManipulator(iimg2);
+var rowMan2 = new RowManipulator({image: padder2.paddedImage});
+var columnMan2 = new ColumnManipulator({image: padder2.paddedImage});
+var irowMan2 = new RowManipulator({image: iimg2});
+var icolumnMan2 = new ColumnManipulator({image: iimg2});
 
 var row2 = rowMan2.row;
 var irow2 = irowMan2.row;
