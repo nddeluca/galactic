@@ -11,7 +11,7 @@ class Display
 
     #@canvasData = @context.createImageData(@width,@height)
     #
-    @canvasBuffer = new ArrayBuffer(@canvasData.data.length)
+    @canvasBuffer = new ArrayBuffer(@width*@height*Uint32Array.BYTES_PER_ELEMENT)
     @canvasView8 = new Uint8ClampedArray(@canvasBuffer)
     @canvasView32 = new Uint32Array(@canvasBuffer)
 
