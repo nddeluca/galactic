@@ -15,8 +15,8 @@ class PSFConvolutor
     @modelPadder = new ImagePadder({image: @model, type: Image})
     @psfPadder = new ImagePadder({image: @psf, type: Image})
 
-    @rows = @modelPadder.paddedHeight
-    @columns = @modelPadder.paddedWidth
+    @rows = @modelPadder.paddedImage.height
+    @columns = @modelPadder.paddedImage.width
 
     @iModelImage = new Image({width: @columns, height: @rows, dataType: @model.dataType})
     @iPsfImage = new Image({width: @columns, height: @rows, dataType: @psf.dataType})
@@ -93,7 +93,7 @@ class PSFConvolutor
     modelData = @model.data
     modelLength = @model.width*@model.height
     norm = 1/(rows*columns)
-    
+
     padder = @modelPadder
     paddedLength = rows*columns
 
