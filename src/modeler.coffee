@@ -50,7 +50,7 @@ class Modeler
 
   updateParam: (name,param,value) ->
     model = @find(name)
-    model.params[param] = value
+    model[param] = value
     model.stale = true
 
   disable: (name) ->
