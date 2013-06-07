@@ -172,9 +172,14 @@ class PSFConvolutor
     while y--
       x = half_col
       while x--
-        tmp13 = rmodelData[x + y*columns]
-        rmodelData[x + y*columns] = rmodelData[x + half_row + (y+half_col)*columns]
-        rmodelData[x + half_row + (y + half_col)*columns] = tmp13
+        tmp13 = rModelData[x + y*columns]
+        rModelData[x + y*columns] = rModelData[x + half_row + (y+half_col)*columns]
+        rModelData[x + half_row + (y + half_col)*columns] = tmp13
+
+        tmp24 = rModelData[x + half_row + y*columns]
+        rModelData[x + half_row + y*columns] = rModelData[x + (y + half_col)*columns]
+        rModelData[x + (y + half_col)*columns] = tmp24
+
 
     padder.save()
 
