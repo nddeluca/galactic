@@ -13,7 +13,6 @@ stretches =
     range = max - min
     invLN10 = 1/Math.LN10
     invMaxLog = 1/(Math.log(range)*invLN10)
-    
     i = imageData.length
     while i--
       value = ~~(255*((Math.log(imageData[i] - min + 1)*invLN10)*invMaxLog))
@@ -35,7 +34,6 @@ stretches =
   sqrt: (imageData,colorData,pixelMap,min,max) ->
     range = max - min
     invMaxSqrt = 1/Math.sqrt(range)
-
     i = imageData.length
     while i--
       value = ~~(255*((Math.sqrt(imageData[i] - min))*invMaxSqrt))

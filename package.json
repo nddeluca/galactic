@@ -5,12 +5,12 @@
   "description": "Project to model galaxy images in the browser.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nddeluca/galacticjs"
+    "url": "https://github.com/nddeluca/galactic"
    },
    "dependencies": {
    },
    "devDependencies": {
      "jsdom": "0.6.0",
-     "canvas": "1.0.2"
+     "canvas": "1.0.3"
    }
 }

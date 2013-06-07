@@ -1,11 +1,9 @@
-require('../spec_helper')
-jsdom = require('jsdom')
+ImageDisplay = require('../../src/image_display')
+Canvas = require('canvas')
 
-Display = require('../../src/display')
+examplesForBaseDisplayInterface = require('../shared/base_display_examples')
 
 describe 'Display', ->
-  display = null
+  examplesForBaseDisplayInterface(ImageDisplay,Canvas)
 
-  beforeEach ->
-    jsdom.env
 
