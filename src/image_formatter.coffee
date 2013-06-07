@@ -13,8 +13,8 @@ class ImageFormatter
     @colors = args.colors || colors
     @colormap = args.colormap || new Colormap(@colors.gray)
     @stretches = args.stretches || stretches
-    @min = utils.min(input.data)
-    @max = utils.max(input.data)
+    @min = utils.min(@input.data)
+    @max = utils.max(@input.data)
 
   setStretch: (stretch) ->
     switch stretch
