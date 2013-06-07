@@ -9,8 +9,7 @@ class Display
     @canvas.height = @height
     @context = @canvas.getContext('2d')
 
-    #@canvasData = @context.createImageData(@width,@height)
-    #
+    @canvasData = @context.createImageData(@width,@height)
     @canvasBuffer = new ArrayBuffer(@width*@height*Uint32Array.BYTES_PER_ELEMENT)
     @canvasView8 = new Uint8ClampedArray(@canvasBuffer)
     @canvasView32 = new Uint32Array(@canvasBuffer)
@@ -43,11 +42,9 @@ class Display
       while y--
         canvasData[(canvasWidth*y)+x] = imageData[coeff - (~~(y*yScaleRatio))*imageWidth]
 
-    #cData = @canvasData
-    #cData.data.set(@canvasView8)
-    #@context.putImageData(cData,0,0)
-
-    @context.putImageData(@canvasView8,0,0)
+    cData = @canvasData
+    cData.data.set(@canvasView8)
+    @context.putImageData(cData,0,0)
     undefined
 
   _set_up_canvas_from_container: (container) ->
