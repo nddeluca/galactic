@@ -21,15 +21,15 @@ class PSFConvolutor
     @iModelImage = new Image({width: @columns, height: @rows, dataType: @model.dataType})
     @iPsfImage = new Image({width: @columns, height: @rows, dataType: @psf.dataType})
 
-    @rRowModel = new RowManipulator(@modelPadder.paddedImage)
-    @iRowModel = new RowManipulator(@iModelImage)
-    @rRowPsf = new RowManipulator(@psfPadder.paddedImage)
-    @iRowPsf = new RowManipulator(@iPsfImage)
+    @rRowModel = new RowManipulator(image: @modelPadder.paddedImage)
+    @iRowModel = new RowManipulator(image: @iModelImage)
+    @rRowPsf = new RowManipulator(image: @psfPadder.paddedImage)
+    @iRowPsf = new RowManipulator(image: @iPsfImage)
 
-    @rColModel = new ColumnManipulator(@modelPadder.paddedImage)
-    @iColModel = new ColumnManipulator(@iModelImage)
-    @rColPsf = new ColumnManipulator(@psfPadder.paddedImage)
-    @iColPsf = new ColumnManipulator(@iPsfImage)
+    @rColModel = new ColumnManipulator(image: @modelPadder.paddedImage)
+    @iColModel = new ColumnManipulator(image: @iModelImage)
+    @rColPsf = new ColumnManipulator(image: @psfPadder.paddedImage)
+    @iColPsf = new ColumnManipulator(image: @iPsfImage)
 
     @paddedLength = @rows*@columns
     @ldnRow = Math.log(@rows)/Math.LN2
