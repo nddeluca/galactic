@@ -69,7 +69,7 @@ class PSFConvolutor
     while r--
       rRowM.load(r)
       iRowM.load(r)
-      fft_dif4_core(rRow,iRow,ldnRow)
+      fft_dif4_core(iRow,rRow,ldnRow)
       rRowM.save(r)
       iRowM.save(r)
 
@@ -77,7 +77,7 @@ class PSFConvolutor
     while c--
       rColM.load(c)
       iColM.load(c)
-      fft_dif4_core(rCol,iCol,ldnCol)
+      fft_dif4_core(iCol,rCol,ldnCol)
       rColM.save(c)
       iColM.save(c)
 
@@ -92,6 +92,7 @@ class PSFConvolutor
 
     modelData = @model.data
     modelLength = @model.width*@model.height
+
     n = rows*columns
     norm = 1/(n*n)
 
@@ -124,7 +125,7 @@ class PSFConvolutor
     while r--
       rRowM.load(r)
       iRowM.load(r)
-      fft_dif4_core(rRow,iRow,ldnRow)
+      fft_dif4_core(iRow,rRow,ldnRow)
       rRowM.save(r)
       iRowM.save(r)
 
@@ -132,7 +133,7 @@ class PSFConvolutor
     while c--
       rColM.load(c)
       iColM.load(c)
-      fft_dif4_core(rCol,iCol,ldnCol)
+      fft_dif4_core(iCol,rCol,ldnCol)
       rColM.save(c)
       iColM.save(c)
 
@@ -150,7 +151,7 @@ class PSFConvolutor
     while r--
       rRowM.load(r)
       iRowM.load(r)
-      fft_dit4_core(iRow,rRow,ldnRow)
+      fft_dit4_core(rRow,iRow,ldnRow)
       rRowM.save(r)
       iRowM.save(r)
 
@@ -158,7 +159,7 @@ class PSFConvolutor
     while c--
       rColM.load(c)
       iColM.load(c)
-      fft_dit4_core(iCol,rCol,ldnCol)
+      fft_dit4_core(rCol,iCol,ldnCol)
       rColM.save(c)
       iColM.save(c)
 
