@@ -28,6 +28,7 @@ class ImagePadder
     data = @originalImage.data
     width = @originalImage.width
     height = @originalImage.height
+
     paddedData = @paddedImage.data
     paddedWidth = @paddedImage.width
     paddedHeight = @paddedImage.height
@@ -55,6 +56,7 @@ class ImagePadder
     data = @originalImage.data
     width = @originalImage.width
     height = @originalImage.height
+
     paddedData = @paddedImage.data
     paddedWidth = @paddedImage.width
     paddedHeight = @paddedImage.height

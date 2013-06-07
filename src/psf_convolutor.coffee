@@ -117,57 +117,57 @@ class PSFConvolutor
 
     padder.load()
 
-    l = paddedLength
-    while l--
-      iModelData[l] = 0
+    #l = paddedLength
+    #while l--
+    #iModelData[l] = 0
 
-    r = rows
-    while r--
-      rRowM.load(r)
-      iRowM.load(r)
-      fft_dif4_core(iRow,rRow,ldnRow)
-      rRowM.save(r)
-      iRowM.save(r)
+    #r = rows
+    #while r--
+    #rRowM.load(r)
+    #iRowM.load(r)
+    #fft_dif4_core(iRow,rRow,ldnRow)
+    #rRowM.save(r)
+    #iRowM.save(r)
 
-    c = columns
-    while c--
-      rColM.load(c)
-      iColM.load(c)
-      fft_dif4_core(iCol,rCol,ldnCol)
-      rColM.save(c)
-      iColM.save(c)
+    #c = columns
+    #while c--
+    ##rColM.load(c)
+    #iColM.load(c)
+    #fft_dif4_core(iCol,rCol,ldnCol)
+    #rColM.save(c)
+    #iColM.save(c)
 
-    l = paddedLength
-    while l--
-      a = rModelData[l]
-      b = iModelData[l]
-      c = rPsfData[l]
-      d = iPsfData[l]
+    #l = paddedLength
+    #while l--
+    #a = rModelData[l]
+    #b = iModelData[l]
+    #c = rPsfData[l]
+    #d = iPsfData[l]
 
-      rModelData[l] = a*c - b*d
-      iModelData[l] = a*d + b*c
+    #rModelData[l] = a*c - b*d
+    #iModelData[l] = a*d + b*c
 
-    r = rows
-    while r--
-      rRowM.load(r)
-      iRowM.load(r)
-      fft_dit4_core(rRow,iRow,ldnRow)
-      rRowM.save(r)
-      iRowM.save(r)
+    #r = rows
+    #while r--
+    #rRowM.load(r)
+    #iRowM.load(r)
+    #fft_dit4_core(rRow,iRow,ldnRow)
+    #rRowM.save(r)
+    #iRowM.save(r)
 
-    c = columns
-    while c--
-      rColM.load(c)
-      iColM.load(c)
-      fft_dit4_core(rCol,iCol,ldnCol)
-      rColM.save(c)
-      iColM.save(c)
+    #c = columns
+    #while c--
+    #rColM.load(c)
+    #iColM.load(c)
+    #fft_dit4_core(rCol,iCol,ldnCol)
+    #rColM.save(c)
+    #iColM.save(c)
 
     padder.save()
 
-    l = modelLength
-    while l--
-      modelData[l] *= norm
+    #l = modelLength
+    #while l--
+    #modelData[l] *= norm
 
     undefined
 
