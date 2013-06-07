@@ -156,7 +156,7 @@ class PSFConvolutor
       rRowM.save(r)
       iRowM.save(r)
 
-      c = columns
+    c = columns
     while c--
       rColM.load(c)
       iColM.load(c)
