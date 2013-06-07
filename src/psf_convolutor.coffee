@@ -164,6 +164,19 @@ class PSFConvolutor
       rColM.save(c)
       iColM.save(c)
 
+
+
+    half_col = columns/2
+    half_row = rows/2
+
+    y = half_row
+    while y--
+      x = half_col
+      while x--
+        tmp13 = modelData[x + y*columns]
+        modelData[x + y*columns] = modelData[x + half_row + (y+half_col)*columns]
+        modelData[x + half_row + (y + half_col)*columns] = tmp13
+
     padder.save()
 
     l = modelLength
