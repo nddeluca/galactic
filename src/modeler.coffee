@@ -21,7 +21,7 @@ class Modeler
   add: (name,type) ->
     switch type
       when 'sersic'
-        model = new Sersic(name,@width,@height)
+        model = new Sersic(name: name, width: @width, height: @height)
       else
         return false
 
