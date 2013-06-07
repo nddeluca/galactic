@@ -17,7 +17,7 @@ Galactic.Modeler = require('./modeler')
 Galactic.Sersic = require('./sersic')
 Galactic.Residual = require('./residual')
 
-Galactic.PSFConvoluter = require('./psf_convoluter')
+Galactic.PSFConvolutor = require('./psf_convolutor')
 
 Galactic.utils = {}
 Galactic.utils.arrayutils = require ('./utils/arrayutils')
