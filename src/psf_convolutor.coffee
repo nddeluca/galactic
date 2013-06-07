@@ -92,7 +92,8 @@ class PSFConvolutor
 
     modelData = @model.data
     modelLength = @model.width*@model.height
-    norm = 1/(rows*columns)
+    n = rows*columns
+    norm = 1/(n*n)
 
     padder = @modelPadder
     paddedLength = rows*columns
