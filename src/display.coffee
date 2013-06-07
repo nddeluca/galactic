@@ -50,7 +50,7 @@ class Display
     @context.putImageData(@canvasView8,0,0)
     undefined
 
-  @_set_up_canvas_from_container: (container) ->
+  _set_up_canvas_from_container: (container) ->
     @container = document.getElementById(container)
     @canvas = document.createElement('canvas')
     @container.appendChild(@canvas)
