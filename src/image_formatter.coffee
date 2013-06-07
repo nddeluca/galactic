@@ -9,10 +9,10 @@ class ImageFormatter
   constructor: (args) ->
     @input = args.input || throw "No input provided"
     @output = args.output || new Image(width: @input.width, height: @input.height, dataType: Uint32Array)
-    @colormap = args.colormap || new Colormap(@colors.gray)
-    @stretches = args.stretches || stretches
     @stretch = args.strech || stretches.linear
     @colors = args.colors || colors
+    @colormap = args.colormap || new Colormap(@colors.gray)
+    @stretches = args.stretches || stretches
     @min = utils.min(input.data)
     @max = utils.max(input.data)
 
