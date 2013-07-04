@@ -33,15 +33,6 @@ class ImagePadder
     paddedWidth = @paddedImage.width
     paddedHeight = @paddedImage.height
 
-    #y = paddedHeight - 1
-    #while y >= height
-    #offset = y*paddedWidth
-    ##x = paddedWidth - 1
-    #while x >= width
-    #paddedData[x + offset] = 0
-    #x--
-    #y--
-    #
     l = paddedData.length
     while l--
       paddedData[l] = 0
