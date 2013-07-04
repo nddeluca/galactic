@@ -13,7 +13,8 @@ class Residual extends Image
     i = @width*@height
 
     while i--
-      residual[i] = fits[i] - model[i]
+      #residual[i] = fits[i] - model[i]
+      residual[i] = model[i]
 
     undefined
 

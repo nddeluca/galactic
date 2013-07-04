@@ -70,7 +70,7 @@ class Modeler
       if model.enabled
         models.push(model)
     models
-  
+
   @saveUndo: ->
     @undo.push(@models)
     if @undo.length > 10
@@ -83,7 +83,7 @@ class Modeler
 
   toJSON: ->
     JSON.stringify(@models)
-    
+
   build: ->
     length = @width*@height
     models = @getEnabledModels()
