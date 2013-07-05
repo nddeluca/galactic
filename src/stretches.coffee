@@ -5,7 +5,7 @@ stretches =
     i = imageData.length
     while i--
       clamped_value = Math.max(min, Math.min(imageData[i], max))
-      value = ~~(255*((Math.abs(clamped_value - min))*invRange))
+      value = ~~(255*((clamped_value - min)*invRange))
       level = Math.max(0,Math.min(value,255))
       colorData[i] = pixelMap[level]
     undefined
