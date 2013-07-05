@@ -13,7 +13,10 @@ class PSFConvolutor
     @psf = args.psf
 
     @modelPadder = new ImagePadder({image: @model, type: Image})
-    @psfPadder = new ImagePadder({image: @psf, type: Image})
+    paddedWidth = @modelPadder.paddedImage.width
+    paddedHeight = @modelPadder.paddedImage.height
+
+    @psfPadder = new ImagePadder({image: @psf, type: Image, paddedWidth: paddedWidth, paddedHeight: paddedHeight})
 
     @rows = @modelPadder.paddedImage.height
     @columns = @modelPadder.paddedImage.width
@@ -163,28 +166,26 @@ class PSFConvolutor
       rColM.save(c)
       iColM.save(c)
 
-
-
     half_col = columns/2
     half_row = rows/2
 
-    y = half_row
-    while y--
-      x = half_col
-      while x--
-        pos1 = x + y*columns
-        pos3 = (x + half_col) + (y + half_row)*columns
+    #y = half_row
+    #while y--
+    #x = half_col
+    #while x--
+    #pos1 = x + y*columns
+    #pos3 = (x + half_col) + (y + half_row)*columns
+    #
+    #tmp13 = rModelData[pos1]
+    #rModelData[pos1] = rModelData[pos3]
+    #rModelData[pos3] = tmp13
 
-        tmp13 = rModelData[pos1]
-        rModelData[pos1] = rModelData[pos3]
-        rModelData[pos3] = tmp13
+    #pos2 = x + half_col + y*columns
+    #pos4 = x + (y + half_row)*columns
 
-        pos2 = x + half_col + y*columns
-        pos4 = x + (y + half_row)*columns
-
-        tmp24 = rModelData[pos2]
-        rModelData[pos2] = rModelData[pos4]
-        rModelData[pos4] = tmp24
+    #tmp24 = rModelData[pos2]
+    #rModelData[pos2] = rModelData[pos4]
+    #rModelData[pos4] = tmp24
 
     padder.save()
 
