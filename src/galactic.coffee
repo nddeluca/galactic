@@ -31,5 +31,7 @@ Galactic.utils.bitreverse = require('./utils/bitreverse')
 Galactic.Gradient = require('./gradient')
 Galactic.Colormap = require('./colormap')
 
+Galactic.math.fftdif4 = require('./math/fftdif4')
+Galactic.math.fftdit4 = require('./math/fftdit4')
 
 module?.exports = Galactic
