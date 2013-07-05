@@ -1,8 +1,6 @@
 revbin = require('./bitreverse')
 
-#Contains utility functions used by the library.
 arrayutils =
-  #Returns the maximum value of an array.
   max: (array) ->
     max = -Infinity
     i = array.length
@@ -11,7 +9,6 @@ arrayutils =
         max = array[i]
     max
 
-  #Returns the mininum value of an array.
   min: (array) ->
     min = Infinity
     i = array.length
@@ -28,6 +25,25 @@ arrayutils =
         temp = array[x]
         array[x] = array[r]
         array[r] = temp
+    undefined
+
+  shift_to_zero: (array) ->
+    max = -Infinity
+    min = Infinity
+    i = array.length
+    while i--
+      value = array[i]
+      if value > max
+        max = value
+      if value < min
+        min = value
+
+    i = array.length
+
+    if min != 0
+      while i--
+        array[i] = array[i] - min
+
     undefined
 
 module?.exports = arrayutils
