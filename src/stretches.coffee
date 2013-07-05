@@ -4,7 +4,8 @@ stretches =
     invRange = 1/(max-min)
     i = imageData.length
     while i--
-      value = ~~(255*((Math.abs(imageData[i] - min))*invRange))
+      clamped_value = Math.min(min, Math.min(imageData[i],max))
+      value = ~~(255*((Math.abs(clamped_value - min))*invRange))
       level = Math.max(0,Math.min(value,255))
       colorData[i] = pixelMap[level]
     undefined
