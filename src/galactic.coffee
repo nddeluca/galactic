@@ -9,6 +9,8 @@ Galactic.Image = require('./image')
 Galactic.Display = require('./display')
 Galactic.ImageFormatter = require('./image_formatter')
 
+Galactic.ImagePadder = require('./image_padder')
+
 Galactic.stretches = require('./stretches')
 Galactic.colors = require('./colors')
 
