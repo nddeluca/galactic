@@ -46,4 +46,17 @@ arrayutils =
 
     undefined
 
+  normalize_to_one: (array) ->
+    total = 0
+    i = array.length
+    while i--
+      total = total + array[i]
+
+    inv_total = 1 / total
+    i = array.length
+    while i--
+      array[i] = array[i]*inv_total
+
+    undefined
+
 module?.exports = arrayutils
