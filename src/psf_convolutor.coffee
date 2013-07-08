@@ -1,5 +1,6 @@
 fft_dif4_core = require('./math/fftdif4')
 fft_dit4_core = require('./math/fftdit4')
+closest_power_of_two = require('./utils/closest_power_of_two')
 
 RowManipulator = require('./row_manipulator')
 ColumnManipulator = require('./column_manipulator')
@@ -12,17 +13,21 @@ class PSFConvolutor
     @model = args.model
     @psf = args.psf
 
-    @modelPadder = new ImagePadder({image: @model, type: Image})
-    paddedWidth = @modelPadder.paddedImage.width
-    paddedHeight = @modelPadder.paddedImage.height
+    min_width = @model.width + @psf.width - 1
+    min_height = @model.height + @psf.height - 1
 
-    @psfPadder = new ImagePadder({image: @psf, type: Image, paddedWidth: paddedWidth, paddedHeight: paddedHeight})
+    paddedWidth = closest_power_of_two(min_width)
+    paddedHeight = closest_power_of_two(max_width)
+
+    @modelPadder = new ImagePadder(image: @model, type: Image, paddedWidth: paddedWidth, paddedHeight: paddedHeight)
+
+    @psfPadder = new ImagePadder(image: @psf, type: Image, paddedWidth: paddedWidth, paddedHeight: paddedHeight)
 
     @rows = @modelPadder.paddedImage.height
     @columns = @modelPadder.paddedImage.width
 
-    @iModelImage = new Image({width: @columns, height: @rows, dataType: @model.dataType})
-    @iPsfImage = new Image({width: @columns, height: @rows, dataType: @psf.dataType})
+    @iModelImage = new Image(width: @columns, height: @rows, dataType: @model.dataType)
+    @iPsfImage = new Image(width: @columns, height: @rows, dataType: @psf.dataType)
 
     @rRowModel = new RowManipulator(image: @modelPadder.paddedImage)
     @iRowModel = new RowManipulator(image: @iModelImage)
