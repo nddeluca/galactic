@@ -169,23 +169,23 @@ class PSFConvolutor
     half_col = columns/2
     half_row = rows/2
 
-    #y = half_row
-    #while y--
-    #x = half_col
-    #while x--
-    #pos1 = x + y*columns
-    #pos3 = (x + half_col) + (y + half_row)*columns
-    #
-    #tmp13 = rModelData[pos1]
-    #rModelData[pos1] = rModelData[pos3]
-    #rModelData[pos3] = tmp13
+    y = half_row
+    while y--
+      x = half_col
+      while x--
+        pos1 = x + y*columns
+        pos3 = (x + half_col) + (y + half_row)*columns
 
-    #pos2 = x + half_col + y*columns
-    #pos4 = x + (y + half_row)*columns
+        tmp13 = rModelData[pos1]
+        rModelData[pos1] = rModelData[pos3]
+        rModelData[pos3] = tmp13
 
-    #tmp24 = rModelData[pos2]
-    #rModelData[pos2] = rModelData[pos4]
-    #rModelData[pos4] = tmp24
+        pos2 = x + half_col + y*columns
+        pos4 = x + (y + half_row)*columns
+
+        tmp24 = rModelData[pos2]
+        rModelData[pos2] = rModelData[pos4]
+        rModelData[pos4] = tmp24
 
     padder.save()
 
@@ -194,9 +194,5 @@ class PSFConvolutor
       modelData[l] *= norm
 
     undefined
-
-
-
-
 
 module?.exports = PSFConvolutor
