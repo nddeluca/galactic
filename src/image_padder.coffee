@@ -37,10 +37,13 @@ class ImagePadder
     while l--
       paddedData[l] = 0
 
+    delta_h = Math.ceil((paddedHeight - height) / 2)
+    delta_w = Math.ceil((paddedWidth - width) / 2)
+
     y = height
     while y--
       offset1 = y*width
-      offset2 = y*paddedWidth
+      offset2 = (y + delta_h)*paddedWidth + delta_w
       x = width
       while x--
         paddedData[x + offset2] = data[x + offset1]
@@ -56,10 +59,13 @@ class ImagePadder
     paddedWidth = @paddedImage.width
     paddedHeight = @paddedImage.height
 
+    delta_h = Math.ceil((paddedHeight - height) / 2)
+    delta_w = Math.ceil((paddedWidth - width) / 2)
+
     y = height
     while y--
       offset1 = y*width
-      offset2 = y*paddedWidth
+      offset2 = (y + delta_h)*paddedWidth + delta_w
       x = width
       while x--
         data[x + offset1] = paddedData[x + offset2]
