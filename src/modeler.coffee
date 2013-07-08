@@ -11,7 +11,6 @@ class Modeler
     @width = @fitsImage.width
     @height = @fitsImage.height
     @image = new Image({width: @width, height: @height})
-    @residual = new Residual(fitsData: @fitsData, modelData: @image.data, width: @width, height: @height)
     @models = []
     @undo = []
 
@@ -108,8 +107,6 @@ class Modeler
           i = length
           while i--
             imageData[i] += modelData[i]
-
-    @residual.build()
 
     undefined
 
