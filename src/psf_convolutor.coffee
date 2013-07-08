@@ -16,8 +16,8 @@ class PSFConvolutor
     min_width = @model.width + @psf.width - 1
     min_height = @model.height + @psf.height - 1
 
-    paddedWidth = closest_power_of_two(min_width)
-    paddedHeight = closest_power_of_two(max_width)
+    paddedWidth = closest_power_of_two(min_width, 1024)
+    paddedHeight = closest_power_of_two(min_height, 1024)
 
     @modelPadder = new ImagePadder(image: @model, type: Image, paddedWidth: paddedWidth, paddedHeight: paddedHeight)
 
