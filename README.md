@@ -52,7 +52,7 @@ FITS = require('fits')
 
 xhr = new XMLHttpRequest()
 xhr.open('GET', 'images/my_fits_file.fits')
-xhr.responseType = 'arraybuffer'    
+xhr.responseType = 'arraybuffer'
 xhr.send()
 
 xhr.onload = (e) ->
@@ -60,7 +60,7 @@ xhr.onload = (e) ->
   fitsFile = new FITS.file(xhr.response)
   image = fitsFile.getDataUnit()
   image.getFrame()
-  
+
   display = new FitsCanvas.Display('my-canvas-container',500,image)
   display.processImage()
   display.draw()
@@ -78,9 +78,10 @@ To Do
 
 References
 ---
-https://github.com/astrojs/fitsjs  
-https://hacks.mozilla.org/2011/12/faster-canvas-pixel-manipulation-with-typed-arrays/  
-http://tech-algorithm.com/articles/nearest-neighbor-image-scaling/  
-http://coffeescriptcookbook.com/  
+http://www.jjj.de/fxt/fxtpage.html (FXT Library and the fxtbook 'Matters Computational')
+https://github.com/astrojs/fitsjs
+https://hacks.mozilla.org/2011/12/faster-canvas-pixel-manipulation-with-typed-arrays/
+http://tech-algorithm.com/articles/nearest-neighbor-image-scaling
+http://coffeescriptcookbook.com
 
 

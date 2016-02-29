@@ -1,3 +1,14 @@
+# This function is derived from the
+# FXT Library (http://www.jjj.de/fxt/fxtpage.html)
+# by Joerg Arndt
+#
+# Original copyright from fxt/fft/fft8ditcore.cc:
+#
+# This file is part of the FXT library.
+# Copyright (C) 2010, 2012 Joerg Arndt
+# License: GNU General Public License version 3 or later,
+# see the file COPYING.txt in the main directory.
+
 fft8_dit_core = (fr,fi,offset) ->
 # 8-point decimation in time FFT
 # isign = +1

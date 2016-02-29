@@ -1,3 +1,14 @@
+# The revbin_permute function is derived from the
+# FXT Library (http://www.jjj.de/fxt/fxtpage.html)
+# by Joerg Arndt
+#
+# Original copyright from fxt/fft/revbinpermute.h:
+#
+# This file is part of the FXT library.
+# Copyright (C) 2010, 2012 Joerg Arndt
+# License: GNU General Public License version 3 or later,
+# see the file COPYING.txt in the main directory.
+
 revbin = require('./bitreverse')
 
 arrayutils =
